@@ -3,6 +3,6 @@ local mouse = player:GetMouse()
 
 mouse.KeyDown:connect(function(key)
    if key == "#" then
-       print("Pressed a")
+       print("Pressed #")
    end
 end)
