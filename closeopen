@@ -2,7 +2,7 @@ local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
 
 mouse.KeyDown:connect(function(key)
-   if key == "a" then
+   if key == "#" then
        print("Pressed a")
    end
 end)
