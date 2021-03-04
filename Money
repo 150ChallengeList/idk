@@ -1,0 +1,8 @@
+function getNil(name,class) for _,v in pairs(getnilinstances())do if v.ClassName==class and v.Name==name then return v;end end end
+
+local args = {
+    [1] = getNil("Value", "LocalScript"),
+    [2] = 9909099
+}
+
+game:GetService("ReplicatedStorage")["Game Objects"].Remotes["Update Case Bux"]:FireServer(unpack(args))
