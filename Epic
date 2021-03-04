@@ -1,0 +1,13 @@
+-- Script Made by [Pico] Yaight#9243
+
+function getNil(name,class) for _,v in pairs(getnilinstances())do if v.ClassName==class and v.Name==name then return v;end end end
+
+local args = {
+    [1] = getNil("Value", "LocalScript"),
+    [2] = 99599,
+    [3] = "Epic",
+    [4] = 1,
+    [5] = 2
+}
+
+game:GetService("ReplicatedStorage")["Game Objects"].Remotes["Wipe Inventory"]:InvokeServer(unpack(args))
