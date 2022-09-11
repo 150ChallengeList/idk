@@ -1,13 +1,573 @@
--- Script Made by [Pico] Yaight#9243
+local TeslaBeta = {}
 
-function getNil(name,class) for _,v in pairs(getnilinstances())do if v.ClassName==class and v.Name==name then return v;end end end
+function TeslaBeta:CreateWindow()
+	local TEESLA = Instance.new("ScreenGui")
+	local Main = Instance.new("Frame")
+	local MainCorner = Instance.new("UICorner")
+	local SideFrame = Instance.new("Frame")
+	local TeslaFont = Instance.new("ImageLabel")
+	local TeslaIcon = Instance.new("ImageLabel")
+	local TapButtonHolder = Instance.new("ScrollingFrame")
+	local TapButtonHolderList = Instance.new("UIListLayout")
+	local SideframeCorner = Instance.new("UICorner")
+	local SideframeFix = Instance.new("Frame")
+	local GudLookingBar = Instance.new("ImageLabel")
+	local PageUiList = Instance.new("UIListLayout")
 
-local args = {
-    [1] = getNil("Value", "LocalScript"),
-    [2] = 99599,
-    [3] = "Unclassified",
-    [4] = 1,
-    [5] = 2
-}
 
-game:GetService("ReplicatedStorage")["Game Objects"].Remotes["Wipe Inventory"]:InvokeServer(unpack(args))
+	TEESLA.Name = "TEESLA"
+	TEESLA.Parent = game.CoreGui
+	TEESLA.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Main.Name = "Main"
+	Main.Parent = TEESLA
+	Main.BackgroundColor3 = Color3.fromRGB(31, 30, 36)
+	Main.Position = UDim2.new(0.270883918, 0, 0.254589975, 0)
+	Main.Size = UDim2.new(0, 598, 0, 400)
+
+	MainCorner.Name = "MainCorner"
+	MainCorner.Parent = Main
+
+	SideFrame.Name = "SideFrame"
+	SideFrame.Parent = Main
+	SideFrame.BackgroundColor3 = Color3.fromRGB(46, 46, 56)
+	SideFrame.BorderSizePixel = 0
+	SideFrame.Size = UDim2.new(0, 163, 0, 400)
+
+	TeslaFont.Name = "TeslaFont"
+	TeslaFont.Parent = SideFrame
+	TeslaFont.BackgroundColor3 = Color3.fromRGB(10, 10, 13)
+	TeslaFont.BackgroundTransparency = 1.000
+	TeslaFont.Position = UDim2.new(0.208588958, 0, 0.14381355, 0)
+	TeslaFont.Size = UDim2.new(0, 94, 0, 56)
+	TeslaFont.Image = "rbxassetid://10875119922"
+
+	TeslaIcon.Name = "TeslaIcon"
+	TeslaIcon.Parent = SideFrame
+	TeslaIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TeslaIcon.BackgroundTransparency = 1.000
+	TeslaIcon.Position = UDim2.new(0.327903509, 0, 0.0399999991, 0)
+	TeslaIcon.Size = UDim2.new(0, 55, 0, 56)
+	TeslaIcon.Image = "rbxassetid://10875125512"
+
+	TapButtonHolder.Name = "TapButtonHolder"
+	TapButtonHolder.Parent = SideFrame
+	TapButtonHolder.Active = true
+	TapButtonHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TapButtonHolder.BackgroundTransparency = 1.000
+	TapButtonHolder.Position = UDim2.new(0.0552147254, 0, 0.282499999, 0)
+	TapButtonHolder.Size = UDim2.new(0, 144, 0, 272)
+	TapButtonHolder.ScrollBarThickness = 0
+
+	TapButtonHolderList.Name = "TapButtonHolderList"
+	TapButtonHolderList.Parent = TapButtonHolder
+	TapButtonHolderList.SortOrder = Enum.SortOrder.LayoutOrder
+	TapButtonHolderList.Padding = UDim.new(0, 6)
+
+	SideframeCorner.Name = "SideframeCorner"
+	SideframeCorner.Parent = SideFrame
+
+	SideframeFix.Name = "SideframeFix"
+	SideframeFix.Parent = SideFrame
+	SideframeFix.BackgroundColor3 = Color3.fromRGB(46, 46, 56)
+	SideframeFix.BorderSizePixel = 0
+	SideframeFix.Position = UDim2.new(0.93865031, 0, 0.282499999, 0)
+	SideframeFix.Size = UDim2.new(0, 10, 0, 287)
+
+	GudLookingBar.Name = "GudLookingBar"
+	GudLookingBar.Parent = Main
+	GudLookingBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	GudLookingBar.BorderSizePixel = 0
+	GudLookingBar.Size = UDim2.new(0, 598, 0, 6)
+	GudLookingBar.Image = "rbxassetid://10875251735"
+	
+	local PageHandler = {}
+
+	function PageHandler:Page(tabName, tabSize)
+		local PageButton = Instance.new("TextButton")
+		local PageButtonCorner = Instance.new("UICorner")
+		local Page = Instance.new("ScrollingFrame")
+		
+		PageUiList.Name = "PageUiList"
+		PageUiList.Parent = Page
+		PageUiList.SortOrder = Enum.SortOrder.LayoutOrder
+		PageUiList.Padding = UDim.new(0, 8)
+		
+		PageButton.Name = "PageButton"
+		PageButton.Parent = TapButtonHolder
+		PageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		PageButton.BackgroundTransparency = 0.750
+		PageButton.Size = UDim2.new(0, 144, 0, 50)
+		PageButton.Font = Enum.Font.Gotham
+		PageButton.Text = "PageButton"
+		PageButton.TextColor3 = Color3.fromRGB(226, 226, 226)
+		PageButton.TextSize = 14.000
+		--[[for i, v in next, TapButtonHolder:GetChildren() do
+			if v:IsA("TextButton") and v.Name == "TapButtonHolder" then
+				v.BackgroundColor3 = Color3.fromRGB(48, 51, 53)
+				v.Font = Enum.Font.GothamMedium
+				v.TextColor3 = Color3.fromRGB(190, 193, 193)
+				v.TextSize = 12.000
+				v.Size = UDim2.new(0, v.TextBounds.X + 8, 0, 19)
+			end
+		end]]--
+		for i, v in next, Main:GetChildren() do
+			if v.Name == "Page" then v.Visible = false end
+		end
+		Page.Visible = true
+		
+		PageButtonCorner.Name = "PageButtonCorner"
+		PageButtonCorner.Parent = PageButton
+		
+		Page.Name = "Page"
+		Page.Parent = Main
+		Page.Active = true
+		Page.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Page.BackgroundTransparency = 1.000
+		Page.Position = UDim2.new(0.295986623, 0, 0.0399999991, 0)
+		Page.Size = UDim2.new(0, 410, 0, 372)
+		Page.ScrollBarThickness = 0
+		Page.CanvasSize = UDim2.new(0, 0, tabSize, 0) or UDim2.new(0, 0, 2, 0)
+		
+		local ItemHandling = {}
+
+		function ItemHandling:Label(labelText)
+			local Label = Instance.new("Frame")
+			local LabelCorner = Instance.new("UICorner")
+			local LabelText = Instance.new("TextLabel")
+			
+			Label.Name = "Label"
+			Label.Parent = Page
+			Label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Label.BackgroundTransparency = 0.750
+			Label.Position = UDim2.new(0, 0, 0.311827958, 0)
+			Label.Size = UDim2.new(0, 410, 0, 50)
+
+			LabelCorner.Name = "LabelCorner"
+			LabelCorner.Parent = Label
+
+			LabelText.Name = "LabelText"
+			LabelText.Parent = Label
+			LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			LabelText.BackgroundTransparency = 1.000
+			LabelText.Position = UDim2.new(0.0585365854, 0, 0, 0)
+			LabelText.Size = UDim2.new(0, 362, 0, 50)
+			LabelText.Font = Enum.Font.Gotham
+			LabelText.Text = labelText or "Label"
+			LabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			LabelText.TextSize = 14.000
+			LabelText.TextXAlignment = Enum.TextXAlignment.Left
+		end
+		
+		function ItemHandling:Button(buttonText, callback)
+			local Button = Instance.new("TextButton")
+			local ButtonCorner = Instance.new("UICorner")
+			local ButtonText = Instance.new("TextLabel")
+			
+			Button.Name = "Button"
+			Button.Parent = Page
+			Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Button.BackgroundTransparency = 0.750
+			Button.Size = UDim2.new(0, 410, 0, 50)
+			Button.Font = Enum.Font.SourceSans
+			Button.Text = ""
+			Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Button.TextSize = 14.000
+
+			ButtonCorner.Name = "ButtonCorner"
+			ButtonCorner.Parent = Button
+
+			ButtonText.Name = "ButtonText"
+			ButtonText.Parent = Button
+			ButtonText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ButtonText.BackgroundTransparency = 1.000
+			ButtonText.Position = UDim2.new(0.0536585376, 0, 0, 0)
+			ButtonText.Size = UDim2.new(0, 364, 0, 50)
+			ButtonText.Font = Enum.Font.Gotham
+			ButtonText.Text = buttonText or "Button"
+			ButtonText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			ButtonText.TextSize = 14.000
+			ButtonText.TextXAlignment = Enum.TextXAlignment.Left
+			
+			Button.MouseButton1Click:Connect(function()
+				callback()
+			end)
+		end
+		
+		function ItemHandling:Slider(sliderText, startValue, endValue, defaultValue, callback)
+			local Slider = Instance.new("Frame")
+			local SliderCorner = Instance.new("UICorner")
+			local SliderGeneral = Instance.new("Frame")
+			local SliderGeneralCorner = Instance.new("UICorner")
+			local SliderFill = Instance.new("Frame")
+			local SliderFillCorner = Instance.new("UICorner")
+			local SliderButton = Instance.new("TextButton")
+			local SliderText = Instance.new("TextLabel")
+			local SliderValue = Instance.new("TextLabel")
+			
+			Slider.Name = "Slider"
+			Slider.Parent = Page
+			Slider.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Slider.BackgroundTransparency = 0.750
+			Slider.Position = UDim2.new(0, 0, 0.155913979, 0)
+			Slider.Size = UDim2.new(0, 410, 0, 50)
+
+			SliderCorner.Name = "SliderCorner"
+			SliderCorner.Parent = Slider
+
+			SliderGeneral.Name = "SliderGeneral"
+			SliderGeneral.Parent = Slider
+			SliderGeneral.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderGeneral.Position = UDim2.new(0.0585365854, 0, 0.639999986, 0)
+			SliderGeneral.Size = UDim2.new(0, 362, 0, 7)
+
+			SliderGeneralCorner.Name = "SliderGeneralCorner"
+			SliderGeneralCorner.Parent = SliderGeneral
+
+			SliderFill.Name = "SliderFill"
+			SliderFill.Parent = SliderGeneral
+			SliderFill.BackgroundColor3 = Color3.fromRGB(137, 200, 255)
+			SliderFill.Position = UDim2.new(-0.00552486209, 0, 0, 0)
+			SliderFill.Size = UDim2.new(0, 181, 0, 7)
+
+			SliderFillCorner.Name = "SliderFillCorner"
+			SliderFillCorner.Parent = SliderFill
+
+			SliderButton.Name = "SliderButton"
+			SliderButton.Parent = SliderGeneral
+			SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderButton.BackgroundTransparency = 1.000
+			SliderButton.Size = UDim2.new(0, 362, 0, 7)
+			SliderButton.Font = Enum.Font.SourceSans
+			SliderButton.Text = ""
+			SliderButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+			SliderButton.TextSize = 14.000
+
+			SliderText.Name = "SliderText"
+			SliderText.Parent = Slider
+			SliderText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderText.BackgroundTransparency = 1.000
+			SliderText.Position = UDim2.new(0.0536585376, 0, 0, 0)
+			SliderText.Size = UDim2.new(0, 310, 0, 32)
+			SliderText.Font = Enum.Font.Gotham
+			SliderText.Text = sliderText or "Slider"
+			SliderText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			SliderText.TextSize = 14.000
+			SliderText.TextXAlignment = Enum.TextXAlignment.Left
+
+			SliderValue.Name = "SliderValue"
+			SliderValue.Parent = Slider
+			SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderValue.BackgroundTransparency = 1.000
+			SliderValue.Position = UDim2.new(0.8097561, 0, 0, 0)
+			SliderValue.Size = UDim2.new(0, 54, 0, 32)
+			SliderValue.Font = Enum.Font.Gotham
+			SliderValue.Text = "50"
+			SliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+			SliderValue.TextSize = 14.000
+			SliderValue.TextXAlignment = Enum.TextXAlignment.Right
+			
+			callback = callback or function() end
+
+			local mouse = game.Players.LocalPlayer:GetMouse()
+			local uis = game:GetService("UserInputService")
+			local Value;
+
+
+			do
+				SliderFill.Size = UDim2.new((defaultValue or 0) / endValue, 0, 0, 25)
+				SliderValue.Text = tostring(defaultValue)
+			end
+
+			callback(tonumber(SliderValue.Text))
+
+			--{0, 406},{0, 25}
+
+			SliderButton.MouseButton1Down:Connect(function()
+				Value = math.floor((((tonumber(endValue) - tonumber(startValue)) / 406) * SliderFill.AbsoluteSize.X) + tonumber(startValue)) or 0
+				pcall(function()
+					callback(Value)
+				end)
+				SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 362), 0, 7)
+				moveconnection = mouse.Move:Connect(function()
+					SliderValue.Text = Value
+					Value = math.floor((((tonumber(endValue) - tonumber(startValue)) / 406) * SliderFill.AbsoluteSize.X) + tonumber(startValue))
+					SliderValue.Text = Value
+					pcall(function()
+						callback(Value)
+					end)
+					SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 362), 0, 7)
+				end)
+				releaseconnection = uis.InputEnded:Connect(function(Mouse)
+					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+						SliderValue.Text = Value
+						Value = math.floor((((tonumber(endValue) - tonumber(startValue)) / 406) * SliderFill.AbsoluteSize.X) + tonumber(startValue))
+						SliderValue.Text = Value
+						pcall(function()
+							callback(Value)
+						end)
+						SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 362), 0, 7)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
+				end)
+			end)
+		end
+		
+		function ItemHandling:Toggle(toggleText, toggled, callback)
+			local Toggle = Instance.new("TextButton")
+			local ToggleCorner = Instance.new("UICorner")
+			local ToggleText = Instance.new("TextLabel")
+			local Off = Instance.new("Frame")
+			local OffCorner = Instance.new("UICorner")
+			local OffCircle = Instance.new("Frame")
+			local OffCircleCorner = Instance.new("UICorner")
+			local On = Instance.new("Frame")
+			local OnCorner = Instance.new("UICorner")
+			local OnCircle = Instance.new("Frame")
+			local OnCircleCorner = Instance.new("UICorner")
+			
+			Toggle.Name = "Toggle"
+			Toggle.Parent = Page
+			Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Toggle.BackgroundTransparency = 0.750
+			Toggle.Position = UDim2.new(0, 0, 0.467741936, 0)
+			Toggle.Size = UDim2.new(0, 410, 0, 50)
+			Toggle.Font = Enum.Font.SourceSans
+			Toggle.Text = ""
+			Toggle.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Toggle.TextSize = 14.000
+
+			ToggleCorner.Name = "ToggleCorner"
+			ToggleCorner.Parent = Toggle
+
+			ToggleText.Name = "ToggleText"
+			ToggleText.Parent = Toggle
+			ToggleText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleText.BackgroundTransparency = 1.000
+			ToggleText.Position = UDim2.new(0.0585365854, 0, 0, 0)
+			ToggleText.Size = UDim2.new(0, 318, 0, 50)
+			ToggleText.Font = Enum.Font.Gotham
+			ToggleText.Text = "Toggle"
+			ToggleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleText.TextSize = 14.000
+			ToggleText.TextXAlignment = Enum.TextXAlignment.Left
+
+			Off.Name = "Off"
+			Off.Parent = Toggle
+			Off.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Off.BackgroundTransparency = 0.750
+			Off.Position = UDim2.new(0.89268291, 0, 0.399999857, 0)
+			Off.Size = UDim2.new(0, 20, 0, 10)
+			Off.Visible = false
+
+			OffCorner.CornerRadius = UDim.new(0, 999)
+			OffCorner.Name = "OffCorner"
+			OffCorner.Parent = Off
+
+			OffCircle.Name = "OffCircle"
+			OffCircle.Parent = Off
+			OffCircle.BackgroundColor3 = Color3.fromRGB(137, 200, 255)
+			OffCircle.Position = UDim2.new(0.399999619, 0, -0.100000381, 0)
+			OffCircle.Size = UDim2.new(0, 12, 0, 12)
+
+			OffCircleCorner.Name = "OffCircleCorner"
+			OffCircleCorner.Parent = OffCircle
+
+			On.Name = "On"
+			On.Parent = Toggle
+			On.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			On.BackgroundTransparency = 0.750
+			On.Position = UDim2.new(0.89268291, 0, 0.399999857, 0)
+			On.Size = UDim2.new(0, 20, 0, 10)
+
+			OnCorner.CornerRadius = UDim.new(0, 999)
+			OnCorner.Name = "OnCorner"
+			OnCorner.Parent = On
+
+			OnCircle.Name = "OnCircle"
+			OnCircle.Parent = On
+			OnCircle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			OnCircle.BackgroundTransparency = 0.500
+			OnCircle.Position = UDim2.new(-3.87430191e-07, 0, -0.100000381, 0)
+			OnCircle.Size = UDim2.new(0, 12, 0, 12)
+
+			OnCircleCorner.Name = "OnCircleCorner"
+			OnCircleCorner.Parent = OnCircle
+			
+			if toggled then
+				On.Visible = false
+				OnCircle.Visible = false
+				Off.Visible = true
+				OffCircle.Visible = true
+			end
+
+			Toggle.MouseButton1Click:Connect(function()
+				toggled = not toggled
+				task.spawn(function()
+					callback(toggled)
+				end)
+				if not toggled then
+					On.Visible = true
+					OnCircle.Visible = true
+					Off.Visible = false
+					OffCircle.Visible = false
+				else
+					On.Visible = false
+					OnCircle.Visible = false
+					Off.Visible = true
+					OffCircle.Visible = true
+				end
+			end)
+		end
+		
+		function ItemHandling:TextBox(TextboxText, DefaultPreset, callback)
+			local Textbox = Instance.new("Frame")
+			local TextboxCorner = Instance.new("UICorner")
+			local TextboxBox = Instance.new("TextBox")
+			
+			Textbox.Name = "Textbox"
+			Textbox.Parent = Page
+			Textbox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Textbox.BackgroundTransparency = 0.750
+			Textbox.Position = UDim2.new(0, 0, 0.623655915, 0)
+			Textbox.Size = UDim2.new(0, 410, 0, 50)
+
+			TextboxCorner.Name = "TextboxCorner"
+			TextboxCorner.Parent = Textbox
+
+			TextboxBox.Name = "TextboxBox"
+			TextboxBox.Parent = Textbox
+			TextboxBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			TextboxBox.BackgroundTransparency = 1.000
+			TextboxBox.Position = UDim2.new(0.0536585376, 0, 0, 0)
+			TextboxBox.Size = UDim2.new(0, 364, 0, 50)
+			TextboxBox.Font = Enum.Font.Gotham
+			TextboxBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+			TextboxBox.Text = DefaultPreset or "Type Text..."
+			TextboxBox.PlaceholderText = TextboxText or ""
+			TextboxBox.TextColor3 = Color3.fromRGB(180, 180, 180)
+			TextboxBox.TextSize = 14.000
+			TextboxBox.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+			TextboxBox.TextXAlignment = Enum.TextXAlignment.Left
+			
+			TextboxBox.FocusLost:Connect(function()
+				callback(TextboxBox.Text)
+			end)
+		end
+		
+		--[[function ItemHandling:Dropdown(name)
+			local Dropdown = Instance.new("Frame")
+			local DropdownCorner = Instance.new("UICorner")
+			local DropdownText = Instance.new("TextLabel")
+			local OpenClose = Instance.new("ImageLabel")
+			local OpenCloseButton = Instance.new("TextButton")
+			local DropdownExpanded = Instance.new("ScrollingFrame")
+			local DropdownExpandedUiList = Instance.new("UIListLayout")
+			local DropdownExpandedFix = Instance.new("Frame")
+			
+			Dropdown.Name = "Dropdown"
+			Dropdown.Parent = Page
+			Dropdown.BackgroundColor3 = Color3.fromRGB(23, 22, 27)
+			Dropdown.Position = UDim2.new(0, 0, 0.376344085, 0)
+			Dropdown.Size = UDim2.new(0, 410, 0, 50)
+
+			DropdownCorner.Name = "DropdownCorner"
+			DropdownCorner.Parent = Dropdown
+
+			DropdownText.Name = "DropdownText"
+			DropdownText.Parent = Dropdown
+			DropdownText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			DropdownText.BackgroundTransparency = 1.000
+			DropdownText.Position = UDim2.new(0.0585365854, 0, 0, 0)
+			DropdownText.Size = UDim2.new(0, 318, 0, 50)
+			DropdownText.Font = Enum.Font.Gotham
+			DropdownText.Text = name or "Dropdown"
+			DropdownText.TextColor3 = Color3.fromRGB(255, 255, 255)
+			DropdownText.TextSize = 14.000
+			DropdownText.TextXAlignment = Enum.TextXAlignment.Left
+
+			OpenClose.Name = "OpenClose"
+			OpenClose.Parent = Dropdown
+			OpenClose.BackgroundTransparency = 1.000
+			OpenClose.BorderSizePixel = 0
+			OpenClose.Position = UDim2.new(0.8804878, 0, 0.200000003, 0)
+			OpenClose.Size = UDim2.new(0, 30, 0, 30)
+			OpenClose.Image = "http://www.roblox.com/asset/?id=6031091004"
+
+			OpenCloseButton.Name = "OpenCloseButton"
+			OpenCloseButton.Parent = OpenClose
+			OpenCloseButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			OpenCloseButton.BackgroundTransparency = 1.000
+			OpenCloseButton.Size = UDim2.new(0, 30, 0, 30)
+			OpenCloseButton.Font = Enum.Font.SourceSans
+			OpenCloseButton.Text = ""
+			OpenCloseButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+			OpenCloseButton.TextSize = 14.000
+
+			DropdownExpanded.Name = "DropdownExpanded"
+			DropdownExpanded.Parent = Dropdown
+			DropdownExpanded.Active = true
+			DropdownExpanded.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
+			DropdownExpanded.BorderSizePixel = 0
+			DropdownExpanded.LayoutOrder = 1000
+			DropdownExpanded.Position = UDim2.new(0, 0, 1, 0)
+			DropdownExpanded.Size = UDim2.new(0, 410, 0, 143)
+			DropdownExpanded.ZIndex = 9999999
+			DropdownExpanded.CanvasSize = UDim2.new(0, 0, 7, 0)
+			DropdownExpanded.ScrollBarThickness = 4
+
+			DropdownExpandedUiList.Name = "DropdownExpandedUiList"
+			DropdownExpandedUiList.Parent = DropdownExpanded
+			DropdownExpandedUiList.SortOrder = Enum.SortOrder.LayoutOrder
+			DropdownExpandedUiList.Padding = UDim.new(0, 2)
+
+			DropdownExpandedFix.Name = "DropdownExpandedFix"
+			DropdownExpandedFix.Parent = Dropdown
+			DropdownExpandedFix.BackgroundColor3 = Color3.fromRGB(23, 22, 27)
+			DropdownExpandedFix.BorderSizePixel = 0
+			DropdownExpandedFix.Position = UDim2.new(0, 0, 0.800000012, 0)
+			DropdownExpandedFix.Size = UDim2.new(0, 410, 0, 10)
+			
+			local opened = false
+
+			OpenCloseButton.MouseButton1Click:Connect(function()
+				opened = not opened
+				if opened then
+					DropdownExpanded.Visible = true
+					DropdownExpandedFix.Visible = true
+					OpenClose.Rotation = 180
+				else
+					DropdownExpanded.Visible = false
+					DropdownExpandedFix.Visible = false
+					OpenClose.Rotation = 0
+				end
+			end)
+			
+			local dropdownItems = {}
+			
+			function dropdownItems:DropdownButton(Text, callback)
+				local DropdownExpandedButton = Instance.new("TextButton")
+				
+				DropdownExpandedButton.Name = "DropdownExpandedButton"
+				DropdownExpandedButton.Parent = DropdownExpanded
+				DropdownExpandedButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				DropdownExpandedButton.BackgroundTransparency = 1.000
+				DropdownExpandedButton.BorderColor3 = Color3.fromRGB(27, 42, 53)
+				DropdownExpandedButton.Size = UDim2.new(0, 410, 0, 35)
+				DropdownExpandedButton.Font = Enum.Font.Gotham
+				DropdownExpandedButton.Text = "DropdownButton"
+				DropdownExpandedButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+				DropdownExpandedButton.TextSize = 14.000
+				
+				DropdownExpandedButton.MouseButton1Click:Connect(function()
+					callback()
+				end)
+			end
+		end]]--
+		return ItemHandling
+	end
+	return PageHandler
+end
+
+return TeslaBeta
