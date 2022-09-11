@@ -10,7 +10,7 @@ local StatScrollingFrame = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
 
 StatsForTesla.Name = "Stats"
-StatsForTesla.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+StatsForTesla.Parent = game.CoreGui
 StatsForTesla.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
