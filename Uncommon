@@ -1,13 +1,98 @@
--- Script Made by [Pico] Yaight#9243
+local StatsForTesla = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local StatsFrame = Instance.new("Frame")
+local StatsCorner = Instance.new("UICorner")
+local StatsFix = Instance.new("Frame")
+local MainFrameCorner = Instance.new("UICorner")
+local TeslaText = Instance.new("TextLabel")
+local TeslaIcon = Instance.new("ImageLabel")
+local StatScrollingFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
 
-function getNil(name,class) for _,v in pairs(getnilinstances())do if v.ClassName==class and v.Name==name then return v;end end end
+StatsForTesla.Name = "Stats"
+StatsForTesla.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+StatsForTesla.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local args = {
-    [1] = getNil("Value", "LocalScript"),
-    [2] = 99599,
-    [3] = "Uncommon",
-    [4] = 1,
-    [5] = 2
-}
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = StatsForTesla
+MainFrame.BackgroundColor3 = Color3.fromRGB(21, 22, 24)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.769289553, 0, 0.0269277841, 0)
+MainFrame.Size = UDim2.new(0, 274, 0, 196)
 
-game:GetService("ReplicatedStorage")["Game Objects"].Remotes["Wipe Inventory"]:InvokeServer(unpack(args))
+StatsFrame.Name = "StatsFrame"
+StatsFrame.Parent = MainFrame
+StatsFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 33)
+StatsFrame.Position = UDim2.new(-0.000783383846, 0, -0.00368446112, 0)
+StatsFrame.Size = UDim2.new(0, 274, 0, 32)
+
+StatsCorner.Name = "StatsCorner"
+StatsCorner.Parent = StatsFrame
+
+StatsFix.Name = "StatsFix"
+StatsFix.Parent = MainFrame
+StatsFix.BackgroundColor3 = Color3.fromRGB(255, 0, 33)
+StatsFix.BorderSizePixel = 0
+StatsFix.Position = UDim2.new(0, 0, 0.0943877697, 0)
+StatsFix.Size = UDim2.new(0, 274, 0, 12)
+
+MainFrameCorner.Name = "MainFrameCorner"
+MainFrameCorner.Parent = MainFrame
+
+TeslaText.Name = "TeslaText"
+TeslaText.Parent = MainFrame
+TeslaText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TeslaText.BackgroundTransparency = 1.000
+TeslaText.Position = UDim2.new(0.131273061, 0, -0.00510204071, 0)
+TeslaText.Size = UDim2.new(0, 200, 0, 31)
+TeslaText.ZIndex = 100
+TeslaText.Font = Enum.Font.GothamMedium
+TeslaText.Text = "Tesla Stats"
+TeslaText.TextColor3 = Color3.fromRGB(255, 255, 255)
+TeslaText.TextSize = 14.000
+TeslaText.TextXAlignment = Enum.TextXAlignment.Left
+
+TeslaIcon.Name = "TeslaIcon"
+TeslaIcon.Parent = MainFrame
+TeslaIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TeslaIcon.BackgroundTransparency = 1.000
+TeslaIcon.Position = UDim2.new(0.0309934448, 0, 0.0235352218, 0)
+TeslaIcon.Size = UDim2.new(0, 21, 0, 21)
+TeslaIcon.ZIndex = 100
+TeslaIcon.Image = "rbxassetid://10856406628"
+TeslaIcon.ImageColor3 = Color3.fromRGB(0, 0, 0)
+
+StatScrollingFrame.Name = "StatScrollingFrame"
+StatScrollingFrame.Parent = MainFrame
+StatScrollingFrame.Active = true
+StatScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+StatScrollingFrame.BackgroundTransparency = 1.000
+StatScrollingFrame.BorderSizePixel = 0
+StatScrollingFrame.Position = UDim2.new(0.0656934306, 0, 0.193877548, 0)
+StatScrollingFrame.Size = UDim2.new(0, 238, 0, 147)
+StatScrollingFrame.CanvasSize = UDim2.new(0, 0, 1, 0)
+StatScrollingFrame.ScrollBarThickness = 0
+
+local ItemHandling = {}
+
+function ItemHandling:Label(labeltext)
+	local StatLabel = Instance.new("TextLabel")
+
+	StatLabel.Name = "StatLabel"
+	StatLabel.Parent = StatScrollingFrame
+	StatLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	StatLabel.BackgroundTransparency = 1.000
+	StatLabel.Size = UDim2.new(0, 233, 0, 25)
+	StatLabel.Font = Enum.Font.Gotham
+	StatLabel.Text = labeltext or "Stat1"
+	StatLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	StatLabel.TextSize = 14.000
+	StatLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+end
+UIListLayout.Parent = StatScrollingFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 3)
+
+
+return ItemHandling
