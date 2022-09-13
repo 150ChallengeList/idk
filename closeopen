@@ -1,8 +1,555 @@
-local player = game.Players.LocalPlayer
-local mouse = player:GetMouse()
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
 
-mouse.KeyDown:connect(function(key)
-   if key == "#" then
-       print("Pressed #")
-   end
-end)
+local player = Players.LocalPlayer
+
+--function ok
+function Tween(obj, speed, array, additional)
+	local add = additional or {Enum.EasingStyle.Linear, Enum.EasingDirection.Out}
+	local tween = TweenService:Create(obj, TweenInfo.new(speed, table.unpack(add)), array)
+	tween:Play()
+	tween.Completed:Wait()
+end
+
+local TeslaLib = {}
+
+function TeslaLib.CreateWindow()
+	local TeslaPremium = Instance.new("ScreenGui")
+	local TeslaUI = Instance.new("Frame")
+	local TeslaUICorner = Instance.new("UICorner")
+	local SideFrame = Instance.new("Frame")
+	local SideFrameCorner = Instance.new("UICorner")
+	local Icon = Instance.new("ImageLabel")
+	local IconCorner = Instance.new("UICorner")
+	local Username = Instance.new("TextLabel")
+	local VersionPremium = Instance.new("TextLabel")
+	local TapButtonHolderUiListLayout = Instance.new("UIListLayout")
+
+	local ToggleButton = Instance.new("TextButton")
+	local TopFrame = Instance.new("Frame")
+	local TopFrameCorner = Instance.new("UICorner")
+	local CloseButton = Instance.new("TextButton")
+	local CloseImage = Instance.new("ImageLabel")
+	local TeslaName = Instance.new("TextLabel")
+	local Frame = Instance.new("Frame")
+	local TapButtonHolder = Instance.new("ScrollingFrame")
+
+
+	TeslaPremium.Name = "TeslaPremium"
+	TeslaPremium.Parent = game:waitForChild("CoreGui")
+	TeslaPremium.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	TeslaUI.Name = "TeslaUI"
+	TeslaUI.Parent = TeslaPremium
+	TeslaUI.BackgroundColor3 = Color3.fromRGB(41, 43, 53)
+	TeslaUI.Position = UDim2.new(0.240340024, 0, 0.335373342, 0)
+	TeslaUI.Size = UDim2.new(0, 569, 0, 369)
+
+	TeslaUICorner.Name = "TeslaUICorner"
+	TeslaUICorner.Parent = TeslaUI
+
+	SideFrame.Name = "SideFrame"
+	SideFrame.Parent = TeslaUI
+	SideFrame.BackgroundColor3 = Color3.fromRGB(28, 29, 36)
+	SideFrame.Size = UDim2.new(0, 172, 0, 369)
+
+	SideFrameCorner.Name = "SideFrameCorner"
+	SideFrameCorner.Parent = SideFrame
+
+	Icon.Name = "Icon"
+	Icon.Parent = SideFrame
+	Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Icon.BackgroundTransparency = 1.000
+	Icon.Position = UDim2.new(0.064086318, 0, 0.0449186116, 0)
+	Icon.Size = UDim2.new(0, 50, 0, 50)
+	Icon.Image = "rbxassetid://10904116743"
+
+	IconCorner.Name = "IconCorner"
+	IconCorner.Parent = Icon
+
+	Username.Name = "Username"
+	Username.Parent = SideFrame
+	Username.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Username.BackgroundTransparency = 1.000
+	Username.Position = UDim2.new(0.40697673, 0, 0.0406503975, 0)
+	Username.Size = UDim2.new(0, 91, 0, 26)
+	Username.Font = Enum.Font.SourceSansLight
+	Username.Text = game:GetService("Players").LocalPlayer.Name
+	Username.TextColor3 = Color3.fromRGB(227, 227, 227)
+	Username.TextScaled = true
+	Username.TextSize = 14.000
+	Username.TextWrapped = true
+	Username.TextXAlignment = Enum.TextXAlignment.Left
+
+	VersionPremium.Name = "VersionPremium"
+	VersionPremium.Parent = SideFrame
+	VersionPremium.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	VersionPremium.BackgroundTransparency = 1.000
+	VersionPremium.Position = UDim2.new(0.40697673, 0, 0.111111104, 0)
+	VersionPremium.Size = UDim2.new(0, 91, 0, 26)
+	VersionPremium.Font = Enum.Font.SourceSansLight
+	VersionPremium.Text = "Premium"
+	VersionPremium.TextColor3 = Color3.fromRGB(193, 193, 193)
+	VersionPremium.TextSize = 19.000
+	VersionPremium.TextWrapped = true
+	VersionPremium.TextXAlignment = Enum.TextXAlignment.Left
+
+	TapButtonHolder.Name = "TapButtonHolder"
+	TapButtonHolder.Parent = SideFrame
+	TapButtonHolder.Active = true
+	TapButtonHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TapButtonHolder.BackgroundTransparency = 1.000
+	TapButtonHolder.BorderSizePixel = 0
+	TapButtonHolder.Position = UDim2.new(0.0639534891, 0, 0.222222224, 0)
+	TapButtonHolder.Size = UDim2.new(0, 150, 0, 240)
+	TapButtonHolder.ScrollBarThickness = 0
+
+	TapButtonHolderUiListLayout.Name = "TapButtonHolderUiListLayout"
+	TapButtonHolderUiListLayout.Parent = TapButtonHolder
+	TapButtonHolderUiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	TapButtonHolderUiListLayout.Padding = UDim.new(0, 8)
+
+	local TabHandling = {}
+
+	function TabHandling:Tab(tabText)
+		local TapButton = Instance.new("TextButton")
+		local TapButtonCorner = Instance.new("UICorner")
+		local Tap = Instance.new("ScrollingFrame")
+		local UIListLayout = Instance.new("UIListLayout")
+
+		TapButton.Name = "TapButton"
+		TapButton.Parent = TapButtonHolder
+		TapButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		TapButton.BackgroundTransparency = 0.700
+		TapButton.Size = UDim2.new(0, 150, 0, 40)
+		TapButton.Font = Enum.Font.SourceSansLight
+		TapButton.Text = tabText or "TabButton"
+		TapButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TapButton.TextSize = 19.000
+		TapButton.MouseButton1Click:Connect(function()
+			for i, v in next, TeslaUI:GetChildren() do
+				if v:IsA("ScrollingFrame") and v.Name == "Tap" then
+					v.Visible = false
+				end
+			end
+			Tap.Visible = true
+		end)
+
+		TapButtonCorner.Name = "TapButtonCorner"
+		TapButtonCorner.Parent = TapButton
+
+		Tap.Name = "Tap"
+		Tap.Parent = TeslaUI
+		Tap.Active = true
+		Tap.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Tap.BackgroundTransparency = 1.000
+		Tap.BorderSizePixel = 0
+		Tap.Position = UDim2.new(0.325131804, 0, 0.130081296, 0)
+		Tap.Size = UDim2.new(0, 375, 0, 311)
+		Tap.ScrollBarThickness = 4
+		Tap.Visible = false
+		TeslaUI:FindFirstChild("Tap").Visible = true
+
+		UIListLayout.Parent = Tap
+		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		UIListLayout.Padding = UDim.new(0, 8)
+
+		local ItemHandling = {}
+
+		function ItemHandling:createSection(sectionText)
+			local Section = Instance.new("TextLabel")
+			local SectionCorner = Instance.new("UICorner")
+
+			Section.Name = "Section"
+			Section.Parent = Tap
+			Section.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Section.BackgroundTransparency = 0.750
+			Section.Size = UDim2.new(0, 361, 0, 40)
+			Section.Font = Enum.Font.SourceSans
+			Section.Text = sectionText or "Section"
+			Section.TextColor3 = Color3.fromRGB(236, 236, 236)
+			Section.TextSize = 21.000
+
+			SectionCorner.Name = "SectionCorner"
+			SectionCorner.Parent = Section
+		end
+
+		function ItemHandling:createLabel(labelText)
+			local Label = Instance.new("Frame")
+			local LabelCorner = Instance.new("UICorner")
+			local LabelText = Instance.new("TextLabel")
+
+			Label.Name = "Label"
+			Label.Parent = Tap
+			Label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Label.BackgroundTransparency = 0.750
+			Label.Size = UDim2.new(0, 361, 0, 40)
+
+			LabelCorner.Name = "LabelCorner"
+			LabelCorner.Parent = Label
+
+			LabelText.Name = "LabelText"
+			LabelText.Parent = Label
+			LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			LabelText.BackgroundTransparency = 1.000
+			LabelText.Position = UDim2.new(0.0526315793, 0, 0, 0)
+			LabelText.Size = UDim2.new(0, 342, 0, 40)
+			LabelText.Font = Enum.Font.SourceSansLight
+			LabelText.TextColor3 = Color3.fromRGB(222, 222, 222)
+			LabelText.TextSize = 21.000
+			LabelText.TextXAlignment = Enum.TextXAlignment.Left
+			LabelText.Text = labelText or "label"
+		end
+
+		function ItemHandling:createButton(buttonText, callback)
+			callback = callback or function() end
+
+			local Button = Instance.new("TextButton")
+			local ButtonText = Instance.new("UICorner")
+			local ButtonText_2 = Instance.new("TextLabel")
+
+			Button.Name = "Button"
+			Button.Parent = Tap
+			Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Button.BackgroundTransparency = 0.750
+			Button.Size = UDim2.new(0, 361, 0, 40)
+			Button.Font = Enum.Font.SourceSans
+			Button.Text = ""
+			Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Button.TextSize = 14.000
+
+			Button.MouseButton1Click:Connect(function()
+				if not debounce then
+					debounce = true
+					callback()
+					wait(0.1)
+					debounce = false
+				end
+			end)
+
+			ButtonText.Name = "ButtonText"
+			ButtonText.Parent = Button
+
+			ButtonText_2.Name = "ButtonText"
+			ButtonText_2.Parent = Button
+			ButtonText_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ButtonText_2.BackgroundTransparency = 1.000
+			ButtonText_2.Position = UDim2.new(0.0526315793, 0, 0, 0)
+			ButtonText_2.Size = UDim2.new(0, 342, 0, 40)
+			ButtonText_2.Font = Enum.Font.SourceSansLight
+			ButtonText_2.Text = buttonText or "Button"
+			ButtonText_2.TextColor3 = Color3.fromRGB(222, 222, 222)
+			ButtonText_2.TextSize = 21.000
+			ButtonText_2.TextXAlignment = Enum.TextXAlignment.Left
+		end
+
+		function ItemHandling:createToggle(name, callback)
+
+			local Toggle = Instance.new("Frame")
+			local ToggleCorner = Instance.new("UICorner")
+			local ButtonText_3 = Instance.new("TextLabel")
+			local On = Instance.new("Folder")
+			local OnBackground = Instance.new("Frame")
+			local OnBackgroundCorner = Instance.new("UICorner")
+			local Circle = Instance.new("Frame")
+			local CricleCorner = Instance.new("UICorner")
+			local Off = Instance.new("Folder")
+			local Circle_2 = Instance.new("Frame")
+			local CricleCorner_2 = Instance.new("UICorner")
+			local OnBackground_2 = Instance.new("Frame")
+			local OnBackgroundCorner_2 = Instance.new("UICorner")
+			local ToggleButton = Instance.new("TextButton")
+			Toggle.Name = "Toggle"
+			Toggle.Parent = Tap
+			Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			Toggle.BackgroundTransparency = 0.750
+			Toggle.Size = UDim2.new(0, 361, 0, 40)
+
+			ToggleCorner.Name = "ToggleCorner"
+			ToggleCorner.Parent = Toggle
+
+			ButtonText_3.Name = "ButtonText"
+			ButtonText_3.Parent = Toggle
+			ButtonText_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ButtonText_3.BackgroundTransparency = 1.000
+			ButtonText_3.Position = UDim2.new(0.0526315793, 0, 0, 0)
+			ButtonText_3.Size = UDim2.new(0, 243, 0, 40)
+			ButtonText_3.Font = Enum.Font.SourceSansLight
+			ButtonText_3.Text = name or "Toggle"
+			ButtonText_3.TextColor3 = Color3.fromRGB(222, 222, 222)
+			ButtonText_3.TextSize = 21.000
+			ButtonText_3.TextXAlignment = Enum.TextXAlignment.Left
+
+			On.Name = "On"
+			On.Parent = Toggle
+
+			OnBackground.Name = "OnBackground"
+			OnBackground.Parent = On
+			OnBackground.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			OnBackground.BackgroundTransparency = 0.650
+			OnBackground.BorderSizePixel = 0
+			OnBackground.Position = UDim2.new(0.900276959, 0, 0.375, 0)
+			OnBackground.Size = UDim2.new(0, 20, 0, 10)
+			OnBackground.Visible = false
+
+			OnBackgroundCorner.Name = "OnBackgroundCorner"
+			OnBackgroundCorner.Parent = OnBackground
+
+			Circle.Name = "Circle"
+			Circle.Parent = On
+			Circle.BackgroundColor3 = Color3.fromRGB(85, 190, 83)
+			Circle.Position = UDim2.new(0.922437668, 0, 0.350000143, 0)
+			Circle.Size = UDim2.new(0, 12, 0, 12)
+			Circle.Visible = false
+
+			CricleCorner.CornerRadius = UDim.new(0, 999)
+			CricleCorner.Name = "CricleCorner"
+			CricleCorner.Parent = Circle
+
+			Off.Name = "Off"
+			Off.Parent = Toggle
+
+			Circle_2.Name = "Circle"
+			Circle_2.Parent = Off
+			Circle_2.BackgroundColor3 = Color3.fromRGB(91, 91, 91)
+			Circle_2.Position = UDim2.new(0.900277019, 0, 0.349999994, 0)
+			Circle_2.Size = UDim2.new(0, 12, 0, 12)
+
+			CricleCorner_2.CornerRadius = UDim.new(0, 999)
+			CricleCorner_2.Name = "CricleCorner"
+			CricleCorner_2.Parent = Circle_2
+
+			OnBackground_2.Name = "OnBackground"
+			OnBackground_2.Parent = Off
+			OnBackground_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			OnBackground_2.BackgroundTransparency = 0.650
+			OnBackground_2.BorderSizePixel = 0
+			OnBackground_2.Position = UDim2.new(0.900276959, 0, 0.375, 0)
+			OnBackground_2.Size = UDim2.new(0, 20, 0, 10)
+
+			OnBackgroundCorner_2.Name = "OnBackgroundCorner"
+			OnBackgroundCorner_2.Parent = OnBackground_2
+
+			ToggleButton.Name = "ToggleButton"
+			ToggleButton.Parent = Toggle
+			ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ToggleButton.BackgroundTransparency = 1.000
+			ToggleButton.Size = UDim2.new(0, 361, 0, 40)
+			ToggleButton.Font = Enum.Font.SourceSans
+			ToggleButton.Text = ""
+			ToggleButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+			ToggleButton.TextSize = 14.000
+
+			local toggled = false
+
+			ToggleButton.MouseButton1Click:Connect(function()
+				toggled = not toggled
+				task.spawn(function()
+					callback(toggled)
+				end)
+				if not toggled then
+					Circle.Visible = false
+					Circle_2.Visible = true
+				else
+					Circle.Visible = true
+					Circle_2.Visible = false
+				end
+			end)    
+		end
+		
+		function ItemHandling:createSlider(sliderText, minval, maxval, callback)
+			local SliderFrame = Instance.new("Frame")
+			local SliderFrameCorner = Instance.new("UICorner")
+			local SliderBackground = Instance.new("Frame")
+			local SliderBackgroundCorner = Instance.new("UICorner")
+			local SliderFill = Instance.new("Frame")
+			local SliderFillCorner = Instance.new("UICorner")
+			local SliderButton = Instance.new("TextButton")
+			local SliderText = Instance.new("TextLabel")
+			local ValueText = Instance.new("TextLabel")
+			
+			
+			local minvalue = minval or 0
+			local maxvalue = maxval or 100
+			
+			local mouse = game.Players.LocalPlayer:GetMouse()
+			local uis = game:GetService("UserInputService")
+			local Value;
+			
+			SliderFrame.Name = "SliderFrame"
+			SliderFrame.Parent = Tap
+			SliderFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			SliderFrame.BackgroundTransparency = 0.750
+			SliderFrame.Size = UDim2.new(0, 361, 0, 40)
+
+			SliderFrameCorner.Name = "SliderFrameCorner"
+			SliderFrameCorner.Parent = SliderFrame
+
+			SliderBackground.Name = "SliderBackground"
+			SliderBackground.Parent = SliderFrame
+			SliderBackground.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			SliderBackground.BackgroundTransparency = 0.700
+			SliderBackground.Position = UDim2.new(0.0526315793, 0, 0.649999976, 0)
+			SliderBackground.Size = UDim2.new(0, 326, 0, 10)
+
+			SliderBackgroundCorner.Name = "SliderBackgroundCorner"
+			SliderBackgroundCorner.Parent = SliderBackground
+
+			SliderFill.Name = "SliderFill"
+			SliderFill.Parent = SliderBackground
+			SliderFill.BackgroundColor3 = Color3.fromRGB(167, 176, 255)
+			SliderFill.Size = UDim2.new(0, 163, 0, 10)
+
+			SliderFillCorner.Name = "SliderFillCorner"
+			SliderFillCorner.Parent = SliderFill
+
+			SliderButton.Name = "SliderButton"
+			SliderButton.Parent = SliderBackground
+			SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderButton.BackgroundTransparency = 1.000
+			SliderButton.BorderSizePixel = 0
+			SliderButton.Size = UDim2.new(0, 326, 0, 10)
+			SliderButton.Font = Enum.Font.SourceSans
+			SliderButton.Text = ""
+			SliderButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+			SliderButton.TextSize = 14.000
+
+			SliderText.Name = "SliderText"
+			SliderText.Parent = SliderFrame
+			SliderText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SliderText.BackgroundTransparency = 1.000
+			SliderText.Position = UDim2.new(0.0526315793, 0, 0.075000003, 0)
+			SliderText.Size = UDim2.new(0, 243, 0, 23)
+			SliderText.Font = Enum.Font.SourceSansLight
+			SliderText.Text = sliderText or "Slider"
+			SliderText.TextColor3 = Color3.fromRGB(222, 222, 222)
+			SliderText.TextSize = 19.000
+			SliderText.TextXAlignment = Enum.TextXAlignment.Left
+
+			ValueText.Name = "ValueText"
+			ValueText.Parent = SliderFrame
+			ValueText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ValueText.BackgroundTransparency = 1.000
+			ValueText.Position = UDim2.new(0.828254819, 0, 0.075000003, 0)
+			ValueText.Size = UDim2.new(0, 46, 0, 23)
+			ValueText.Font = Enum.Font.SourceSansLight
+			ValueText.Text = "50"
+			ValueText.TextColor3 = Color3.fromRGB(222, 222, 222)
+			ValueText.TextSize = 19.000
+			ValueText.TextXAlignment = Enum.TextXAlignment.Right
+			
+			SliderButton.MouseButton1Down:Connect(function()
+				Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 326) * SliderFill.AbsoluteSize.X) + tonumber(minvalue)) or 0
+				task.spawn(function()
+					callback(Value)
+				end)
+				SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 326), 0, 10)
+				moveconnection = mouse.Move:Connect(function()
+					ValueText.Text = Value
+					Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 326) * SliderFill.AbsoluteSize.X) + tonumber(minvalue))
+					ValueText.Text = Value
+					task.spawn(function()
+						callback(Value)
+					end)
+					SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 326), 0, 10)
+				end)
+				releaseconnection = uis.InputEnded:Connect(function(Mouse)
+					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+						Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 326) * SliderFill.AbsoluteSize.X) + tonumber(minvalue))
+						ValueText.Text = Value
+						task.spawn(function()
+							callback(Value)
+						end)
+						SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 326), 0, 10)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
+				end)
+			end)
+		end
+
+
+
+		TopFrame.Name = "TopFrame"
+		TopFrame.Parent = TeslaUI
+		TopFrame.BackgroundColor3 = Color3.fromRGB(19, 20, 25)
+		TopFrame.Position = UDim2.new(0.302284718, 0, 0, 0)
+		TopFrame.Size = UDim2.new(0, 397, 0, 40)
+
+		TopFrameCorner.Name = "TopFrameCorner"
+		TopFrameCorner.Parent = TopFrame
+
+		CloseButton.Name = "CloseButton"
+		CloseButton.Parent = TopFrame
+		CloseButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		CloseButton.BackgroundTransparency = 1.000
+		CloseButton.Position = UDim2.new(0.910369039, 0, 0, 0)
+		CloseButton.Size = UDim2.new(0, 40, 0, 40)
+		CloseButton.Font = Enum.Font.SourceSans
+		CloseButton.Text = ""
+		CloseButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+		CloseButton.TextSize = 14.000
+
+		CloseImage.Name = "CloseImage"
+		CloseImage.Parent = CloseButton
+		CloseImage.BackgroundTransparency = 1.000
+		CloseImage.BorderSizePixel = 0
+		CloseImage.Position = UDim2.new(0.125, 0, 0.125, 0)
+		CloseImage.Size = UDim2.new(0, 30, 0, 30)
+		CloseImage.Image = "http://www.roblox.com/asset/?id=6031094678"
+
+		TeslaName.Name = "TeslaName"
+		TeslaName.Parent = TopFrame
+		TeslaName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TeslaName.BackgroundTransparency = 1.000
+		TeslaName.Position = UDim2.new(-0.406360537, 0, 8.07499981, 0)
+		TeslaName.Size = UDim2.new(0, 150, 0, 40)
+		TeslaName.Font = Enum.Font.SourceSansLight
+		TeslaName.Text = "Tesla b0.1"
+		TeslaName.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TeslaName.TextSize = 21.000
+
+		Frame.Parent = TopFrame
+		Frame.BackgroundColor3 = Color3.fromRGB(19, 20, 25)
+		Frame.BorderSizePixel = 0
+		Frame.Size = UDim2.new(0, 32, 0, 40)
+
+		return ItemHandling
+	end
+	local dragToggle = nil
+	local dragSpeed = 0.1
+	local dragStart = nil
+	local startPos = nil
+
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		Tween(TeslaUI, dragSpeed, {Position = position})
+	end
+
+	TopFrame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = TeslaUI.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	game:GetService("UserInputService").InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+
+	end)
+	return TabHandling
+end
+
+return TeslaLib
