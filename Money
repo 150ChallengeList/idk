@@ -227,7 +227,7 @@ function v0x75:CreateWindow()
             ButtonText.TextSize = 24.000
             ButtonText.TextXAlignment = Enum.TextXAlignment.Left
             
-            Button.MouseButton1Click:Connect(function()
+            Button.MouseButton1Down:Connect(function()
                 if not debounce then
                     debounce = true
                     callback()
@@ -302,7 +302,7 @@ function v0x75:CreateWindow()
             
             local toggled = false
 
-            Checkbox.MouseButton1Click:Connect(function()
+            Checkbox.MouseButton1Down:Connect(function()
                 toggled = not toggled
                 task.spawn(function()
                     callback(toggled)
