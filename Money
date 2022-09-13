@@ -1,8 +1,434 @@
-function getNil(name,class) for _,v in pairs(getnilinstances())do if v.ClassName==class and v.Name==name then return v;end end end
+local v0x75 = {}
 
-local args = {
-    [1] = getNil("Value", "LocalScript"),
-    [2] = 9909099
-}
+function v0x75:CreateWindow()
+	local _0x750001 = Instance.new("ScreenGui")
+	local Main = Instance.new("Frame")
+	local TopBar = Instance.new("Frame")
+	local TopBarCorner = Instance.new("UICorner")
+	local Fix2 = Instance.new("Frame")
+	local SideFrame = Instance.new("Frame")
+	local HubName = Instance.new("TextLabel")
+	local GameName = Instance.new("TextLabel")
+	local PageHolder = Instance.new("ScrollingFrame")
+	local PageHolderUiList = Instance.new("UIListLayout")
+	local SideFrameCorner = Instance.new("UICorner")
+	local Fix1 = Instance.new("Frame")
+	local Page = Instance.new("ScrollingFrame")
+	local PageList = Instance.new("UIListLayout")
+	local Checkbox = Instance.new("Frame")
+	local CheckboxText = Instance.new("TextLabel")
+	local CheckboxCorner = Instance.new("UICorner")
+	local Off = Instance.new("Frame")
+	local OffCorner = Instance.new("UICorner")
+	local OffCircle = Instance.new("Frame")
+	local OffCircleCorner = Instance.new("UICorner")
+	local On = Instance.new("Frame")
+	local OnCorner = Instance.new("UICorner")
+	local OnCircle = Instance.new("Frame")
+	local OnCircleCorner = Instance.new("UICorner")
+	local Slider = Instance.new("Frame")
+	local SliderText = Instance.new("TextLabel")
+	local SliderCorner = Instance.new("UICorner")
+	local SliderValue = Instance.new("TextLabel")
+	local SliderWhite = Instance.new("Frame")
+	local SliderFill = Instance.new("Frame")
+	local SliderFillCorner = Instance.new("UICorner")
+	local SliderWhiteCorner = Instance.new("UICorner")
+	local SliderButton = Instance.new("TextButton")
+	local Textbox = Instance.new("Frame")
+	local TextboxCorner = Instance.new("UICorner")
+	local TextboxTextbox = Instance.new("TextBox")
+	local MainCorner = Instance.new("UICorner")
 
-game:GetService("ReplicatedStorage")["Game Objects"].Remotes["Update Case Bux"]:FireServer(unpack(args))
+
+	_0x750001.Name = "0x75#0001"
+	_0x750001.Parent = game.CoreGui
+	_0x750001.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Main.Name = "Main"
+	Main.Parent = _0x750001
+	Main.BackgroundColor3 = Color3.fromRGB(34, 39, 43)
+	Main.BorderSizePixel = 0
+	Main.Position = UDim2.new(0.0580595881, 0, 0.457772344, 0)
+	Main.Size = UDim2.new(0, 575, 0, 400)
+
+	TopBar.Name = "TopBar"
+	TopBar.Parent = Main
+	TopBar.BackgroundColor3 = Color3.fromRGB(13, 15, 17)
+	TopBar.BorderSizePixel = 0
+	TopBar.Size = UDim2.new(0, 575, 0, 30)
+	TopBar.ZIndex = 2
+
+	TopBarCorner.Name = "TopBarCorner"
+	TopBarCorner.Parent = TopBar
+
+	Fix2.Name = "Fix2"
+	Fix2.Parent = TopBar
+	Fix2.BackgroundColor3 = Color3.fromRGB(13, 15, 17)
+	Fix2.BorderSizePixel = 0
+	Fix2.Position = UDim2.new(0, 0, 0.366666675, 0)
+	Fix2.Size = UDim2.new(0, 575, 0, 19)
+	Fix2.ZIndex = 3
+
+	SideFrame.Name = "SideFrame"
+	SideFrame.Parent = Main
+	SideFrame.BackgroundColor3 = Color3.fromRGB(23, 27, 30)
+	SideFrame.BorderSizePixel = 0
+	SideFrame.Size = UDim2.new(0, 161, 0, 400)
+
+	HubName.Name = "HubName"
+	HubName.Parent = SideFrame
+	HubName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	HubName.BackgroundTransparency = 1.000
+	HubName.Position = UDim2.new(0, 0, 0.0975000039, 0)
+	HubName.Size = UDim2.new(0, 161, 0, 25)
+	HubName.Font = Enum.Font.Gotham
+	HubName.Text = "HubName"
+	HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	HubName.TextScaled = true
+	HubName.TextSize = 14.000
+	HubName.TextWrapped = true
+
+	GameName.Name = "GameName"
+	GameName.Parent = SideFrame
+	GameName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	GameName.BackgroundTransparency = 1.000
+	GameName.Position = UDim2.new(0, 0, 0.174999997, 0)
+	GameName.Size = UDim2.new(0, 161, 0, 19)
+	GameName.Font = Enum.Font.Gotham
+	GameName.Text = "Game"
+	GameName.TextColor3 = Color3.fromRGB(197, 197, 197)
+	GameName.TextScaled = true
+	GameName.TextSize = 14.000
+	GameName.TextWrapped = true
+
+	PageHolder.Name = "PageHolder"
+	PageHolder.Parent = SideFrame
+	PageHolder.Active = true
+	PageHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	PageHolder.BackgroundTransparency = 1.000
+	PageHolder.Position = UDim2.new(0.0621118024, 0, 0.25999999, 0)
+	PageHolder.Size = UDim2.new(0, 142, 0, 287)
+	PageHolder.ScrollBarThickness = 0
+
+	PageHolderUiList.Name = "PageHolderUiList"
+	PageHolderUiList.Parent = PageHolder
+	PageHolderUiList.SortOrder = Enum.SortOrder.LayoutOrder
+	PageHolderUiList.Padding = UDim.new(0, 6)
+
+    SideFrameCorner.Name = "SideFrameCorner"
+	SideFrameCorner.Parent = SideFrame
+
+	Fix1.Name = "Fix1"
+	Fix1.Parent = SideFrame
+	Fix1.BackgroundColor3 = Color3.fromRGB(23, 27, 30)
+	Fix1.BorderSizePixel = 0
+	Fix1.Position = UDim2.new(0.944099367, 0, 0.902499974, 0)
+	Fix1.Size = UDim2.new(0, 9, 0, 39)
+
+	Page.Name = "Page"
+	Page.Parent = Main
+	Page.Active = true
+	Page.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Page.BackgroundTransparency = 1.000
+	Page.BorderSizePixel = 0
+	Page.Position = UDim2.new(0.304347813, 0, 0.0974999964, 0)
+	Page.Size = UDim2.new(0, 386, 0, 348)
+	Page.ScrollBarThickness = 0
+	
+	PageList.Name = "PageList"
+	PageList.Parent = Page
+	PageList.SortOrder = Enum.SortOrder.LayoutOrder
+	PageList.Padding = UDim.new(0, 6)
+	
+	local TabHandler = {}
+
+	function TabHandler:Page(tabName)
+		local PageButton = Instance.new("TextButton")
+		local PageButtonCorner = Instance.new("UICorner")
+		
+		PageButton.Name = "PageButton"
+		PageButton.Parent = PageHolder
+		PageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		PageButton.BackgroundTransparency = 0.500
+		PageButton.Size = UDim2.new(0, 142, 0, 41)
+		PageButton.Font = Enum.Font.SourceSans
+		PageButton.Text = tabName or "Page"
+		PageButton.TextColor3 = Color3.fromRGB(241, 241, 241)
+		PageButton.TextSize = 22.000
+		for i, v in next, Main:GetChildren() do
+			if v:IsA("ScrollingFrame") and v.Name == "Page" then
+				v.Visible = false
+			end
+		end
+		Page.Visible = true
+
+		PageButtonCorner.Name = "PageButtonCorner"
+		PageButtonCorner.Parent = PageButton
+
+
+        local ItemHandling = {}
+
+        function ItemHandling:Label(labelText)
+            local Label = Instance.new("Frame")
+            local LabelText = Instance.new("TextLabel")
+            local LabelCorner = Instance.new("UICorner")
+            
+            Label.Name = "Label"
+            Label.Parent = Page
+            Label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            Label.BackgroundTransparency = 0.500
+            Label.Size = UDim2.new(0, 386, 0, 50)
+
+            LabelText.Name = "LabelText"
+            LabelText.Parent = Label
+            LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            LabelText.BackgroundTransparency = 1.000
+            LabelText.Position = UDim2.new(0.0310880821, 0, 0, 0)
+            LabelText.Size = UDim2.new(0, 362, 0, 50)
+            LabelText.Font = Enum.Font.SourceSans
+            LabelText.Text = labelText or "Label"
+            LabelText.TextColor3 = Color3.fromRGB(220, 220, 220)
+            LabelText.TextSize = 24.000
+            LabelText.TextXAlignment = Enum.TextXAlignment.Left
+
+            LabelCorner.Name = "LabelCorner"
+            LabelCorner.Parent = Label
+        end
+        
+        function ItemHandling:Button(buttontext, callback)
+            local Button = Instance.new("TextButton")
+            local ButtonCorner = Instance.new("UICorner")
+            local ButtonText = Instance.new("TextLabel")
+            
+            Button.Name = "Button"
+            Button.Parent = Page
+            Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            Button.BackgroundTransparency = 0.500
+            Button.Position = UDim2.new(0, 0, 0.160919547, 0)
+            Button.Size = UDim2.new(0, 386, 0, 50)
+            Button.Font = Enum.Font.SourceSans
+            Button.Text = ""
+            Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Button.TextSize = 14.000
+
+            ButtonCorner.Name = "ButtonCorner"
+            ButtonCorner.Parent = Button
+
+            ButtonText.Name = "ButtonText"
+            ButtonText.Parent = Button
+            ButtonText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ButtonText.BackgroundTransparency = 1.000
+            ButtonText.Position = UDim2.new(0.0310880821, 0, 0, 0)
+            ButtonText.Size = UDim2.new(0, 362, 0, 50)
+            ButtonText.Font = Enum.Font.SourceSans
+            ButtonText.Text = buttontext or "Button"
+            ButtonText.TextColor3 = Color3.fromRGB(220, 220, 220)
+            ButtonText.TextSize = 24.000
+            ButtonText.TextXAlignment = Enum.TextXAlignment.Left
+            
+            Button.MouseButton1Click:Connect(function()
+                if not debounce then
+                    debounce = true
+                    callback()
+                    wait(0.1)
+                    debounce = false
+                end
+            end)
+        end
+        
+        function ItemHandling:Checkbox(CheckboxTxt, callback)
+            Checkbox.Name = "Checkbox"
+            Checkbox.Parent = Page
+            Checkbox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            Checkbox.BackgroundTransparency = 0.500
+            Checkbox.Size = UDim2.new(0, 386, 0, 50)
+
+            CheckboxText.Name = "CheckboxText"
+            CheckboxText.Parent = Checkbox
+            CheckboxText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            CheckboxText.BackgroundTransparency = 1.000
+            CheckboxText.Position = UDim2.new(0.0310880821, 0, 0, 0)
+            CheckboxText.Size = UDim2.new(0, 294, 0, 50)
+            CheckboxText.Font = Enum.Font.SourceSans
+            CheckboxText.Text = CheckboxTxt or "Checkbox"
+            CheckboxText.TextColor3 = Color3.fromRGB(220, 220, 220)
+            CheckboxText.TextSize = 24.000
+            CheckboxText.TextXAlignment = Enum.TextXAlignment.Left
+
+            CheckboxCorner.Name = "CheckboxCorner"
+            CheckboxCorner.Parent = Checkbox
+
+            Off.Name = "Off"
+            Off.Parent = Checkbox
+            Off.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            Off.BackgroundTransparency = 0.500
+            Off.BorderColor3 = Color3.fromRGB(27, 42, 53)
+            Off.Position = UDim2.new(0.917098463, 0, 0.400000006, 0)
+            Off.Size = UDim2.new(0, 20, 0, 10)
+
+            OffCorner.Name = "OffCorner"
+            OffCorner.Parent = Off
+
+            OffCircle.Name = "OffCircle"
+            OffCircle.Parent = Off
+            OffCircle.BackgroundColor3 = Color3.fromRGB(42, 46, 50)
+            OffCircle.Position = UDim2.new(0, 0, -0.0999999046, 0)
+            OffCircle.Size = UDim2.new(0, 12, 0, 12)
+
+            OffCircleCorner.Name = "OffCircleCorner"
+            OffCircleCorner.Parent = OffCircle
+
+            On.Name = "On"
+            On.Parent = Checkbox
+            On.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            On.BackgroundTransparency = 0.500
+            On.BorderColor3 = Color3.fromRGB(27, 42, 53)
+            On.Position = UDim2.new(0.917098463, 0, 0.400000006, 0)
+            On.Size = UDim2.new(0, 20, 0, 10)
+            On.Visible = false
+
+            OnCorner.Name = "OnCorner"
+            OnCorner.Parent = On
+
+            OnCircle.Name = "OnCircle"
+            OnCircle.Parent = On
+            OnCircle.BackgroundColor3 = Color3.fromRGB(126, 195, 255)
+            OnCircle.Position = UDim2.new(0.400000006, 0, -0.0999999046, 0)
+            OnCircle.Size = UDim2.new(0, 12, 0, 12)
+
+            OnCircleCorner.Name = "OnCircleCorner"
+            OnCircleCorner.Parent = OnCircle
+            
+            local toggled = false
+
+            Checkbox.MouseButton1Click:Connect(function()
+                toggled = not toggled
+                task.spawn(function()
+                    callback(toggled)
+                end)
+                if not toggled then
+                    On.Visible = false
+                    Off.Visible = false
+                else
+                    Off.Visible = true
+                    On.Visible = true
+                end
+            end)
+        end
+        
+        function ItemHandling:Slider(SliderTxt, minvalue, maxvalue, startvalue, callback)
+            Slider.Name = "Slider"
+            Slider.Parent = Page
+            Slider.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            Slider.BackgroundTransparency = 0.500
+            Slider.Size = UDim2.new(0, 386, 0, 50)
+
+            SliderText.Name = "SliderText"
+            SliderText.Parent = Slider
+            SliderText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            SliderText.BackgroundTransparency = 1.000
+            SliderText.Position = UDim2.new(0.0310880821, 0, 0.159999996, 0)
+            SliderText.Size = UDim2.new(0, 263, 0, 18)
+            SliderText.Font = Enum.Font.SourceSans
+            SliderText.Text = SliderTxt or "Slider"
+            SliderText.TextColor3 = Color3.fromRGB(220, 220, 220)
+            SliderText.TextSize = 24.000
+            SliderText.TextXAlignment = Enum.TextXAlignment.Left
+
+            SliderCorner.Name = "SliderCorner"
+            SliderCorner.Parent = Slider
+
+            SliderValue.Name = "SliderValue"
+            SliderValue.Parent = Slider
+            SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            SliderValue.BackgroundTransparency = 1.000
+            SliderValue.Position = UDim2.new(0.792746127, 0, 0.159999996, 0)
+            SliderValue.Size = UDim2.new(0, 68, 0, 18)
+            SliderValue.Font = Enum.Font.SourceSans
+            SliderValue.Text = "50"
+            SliderValue.TextColor3 = Color3.fromRGB(220, 220, 220)
+            SliderValue.TextSize = 24.000
+            SliderValue.TextXAlignment = Enum.TextXAlignment.Right
+
+            SliderWhite.Name = "SliderWhite"
+            SliderWhite.Parent = Slider
+            SliderWhite.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            SliderWhite.Position = UDim2.new(0.0310880821, 0, 0.680593252, 0)
+            SliderWhite.Size = UDim2.new(0, 362, 0, 6)
+
+            SliderFill.Name = "SliderFill"
+            SliderFill.Parent = SliderWhite
+            SliderFill.BackgroundColor3 = Color3.fromRGB(126, 195, 255)
+            SliderFill.Position = UDim2.new(-0.00206111674, 0, -0.0116068525, 0)
+            SliderFill.Size = UDim2.new(0, 181, 0, 6)
+
+            SliderFillCorner.Name = "SliderFillCorner"
+            SliderFillCorner.Parent = SliderFill
+
+            SliderWhiteCorner.Name = "SliderWhiteCorner"
+            SliderWhiteCorner.Parent = SliderWhite
+
+            SliderButton.Name = "SliderButton"
+            SliderButton.Parent = SliderWhite
+            SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            SliderButton.BackgroundTransparency = 1.000
+            SliderButton.Size = UDim2.new(0, 362, 0, 3)
+            SliderButton.Font = Enum.Font.SourceSans
+            SliderButton.Text = ""
+            SliderButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+            SliderButton.TextSize = 14.000
+            
+            callback = callback or function() end
+
+            local mouse = game.Players.LocalPlayer:GetMouse()
+            local uis = game:GetService("UserInputService")
+            local Value;
+
+
+            do
+                SliderFill.Size = UDim2.new((startvalue or 0) / maxvalue, 0, 0, 6)
+                SliderValue.Text = tostring(startvalue)
+            end
+
+            callback(tonumber(SliderValue.Text))
+
+            --{0, 362},{0, 6}
+
+            SliderButton.MouseButton1Down:Connect(function()
+                Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 362) * SliderFill.AbsoluteSize.X) + tonumber(minvalue)) or 0
+                pcall(function()
+                    callback(Value)
+                end)
+                SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 362), 0, 6)
+                moveconnection = mouse.Move:Connect(function()
+                    SliderValue.Text = Value
+                    Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 362) * SliderFill.AbsoluteSize.X) + tonumber(minvalue))
+                    SliderValue.Text = Value
+                    pcall(function()
+                        callback(Value)
+                    end)
+                    SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 362), 0, 6)
+                end)
+                releaseconnection = uis.InputEnded:Connect(function(Mouse)
+                    if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+                        SliderValue.Text = Value
+                        Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 362) * SliderFill.AbsoluteSize.X) + tonumber(minvalue))
+                        SliderValue.Text = Value
+                        pcall(function()
+                            callback(Value)
+                        end)
+                        SliderFill.Size = UDim2.new(0, math.clamp(mouse.X - SliderFill.AbsolutePosition.X, 0, 362), 0, 6)
+                        moveconnection:Disconnect()
+                        releaseconnection:Disconnect()
+                    end
+                end)
+            end)
+        end
+        return ItemHandling
+	end
+	
+	return TabHandler
+end
+
+return v0x75
