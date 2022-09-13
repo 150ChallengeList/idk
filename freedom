@@ -424,9 +424,10 @@ function v0x75:CreateWindow()
 				end
 			end)
 		end)
+		return ItemHandling
 	end
 	
-	return ItemHandling
+	return TabHandler
 end
 
 return v0x75
