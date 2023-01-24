@@ -1,13 +1,52 @@
--- Script Made by [Pico] Yaight#9243
+-- services
+local localPlayer = game:GetService("Players").LocalPlayer
+local character = localPlayer.Character
 
-function getNil(name,class) for _,v in pairs(getnilinstances())do if v.ClassName==class and v.Name==name then return v;end end end
+-- functions
+local function getCar()
+    local currentCar = nil
+    for _, car in next, game:GetService("Workspace").Vehicles:GetChildren() do
+        if car.Name:find(localPlayer.Name) then
+            currentCar = car
+            break
+        end
+    end
 
-local args = {
-    [1] = getNil("Value", "LocalScript"),
-    [2] = 99599,
-    [3] = "Parvus",
-    [4] = 1,
-    [5] = 2
-}
+    if not currentCar then
+        return false, "No car found."
+    end
 
-game:GetService("ReplicatedStorage")["Game Objects"].Remotes["Wipe Inventory"]:InvokeServer(unpack(args))
+    return currentCar
+end
+local function teleport(position)
+    local car = getCar()
+    car.Core:ClearAllChildren()
+    local carConfig = require(car.Tune)
+    for index, value in next, carConfig do
+        local type = typeof(value)
+        if type == "number" then
+            value = 0
+        elseif type == "boolean" then
+            value = false
+        end
+    end
+
+    task.wait()
+
+    car.PrimaryPart.CFrame = CFrame.new(position)
+end
+local function doRace(waitTime, claimRace)
+    if claimRace then
+        teleport(Vector3.new(-174, 26, -752))
+        task.wait(17)
+    end
+
+    for _ = 1, 2 do
+        for _, racePart in next, game:GetService("Workspace").Races["Circuit Race"].Checkpoints:GetChildren() do
+            teleport(racePart.Position)
+            task.wait(waitTime)
+        end
+    end
+end
+
+doRace(0.1, false)
