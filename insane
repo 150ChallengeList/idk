@@ -1,13 +1,694 @@
--- Script Made by [Pico] Yaight#9243
+local library = {}
 
-function getNil(name,class) for _,v in pairs(getnilinstances())do if v.ClassName==class and v.Name==name then return v;end end end
+local plr = game.Players.LocalPlayer
+local tweenService = game:GetService("TweenService")
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local httpService = game:GetService("HttpService")
+local mouse = plr:GetMouse()
+local viewportSize = workspace.CurrentCamera.ViewportSize
 
-local args = {
-    [1] = getNil("Value", "LocalScript"),
-    [2] = 99599,
-    [3] = "Insane",
-    [4] = 1,
-    [5] = 2
-}
+function skip()
 
-game:GetService("ReplicatedStorage")["Game Objects"].Remotes["Wipe Inventory"]:InvokeServer(unpack(args))
+end
+
+local function tweenObject(object, time, data)
+    local tween = tweenService:Create(object, TweenInfo.new(time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), data)
+    tween:Play()
+    return tween
+end
+local function makeDraggable(objectInput, objectDrag)
+    local dragToggle = nil
+	local dragSpeed = 0.12
+	local dragStart = nil
+	local startPos = nil
+ 
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		tweenObject(objectDrag, dragSpeed, {Position = position})
+	end
+ 
+	objectInput.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = objectDrag.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+ 
+	userInputService.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+
+function library:Window(uiName, activeUser)
+  local megumidev = Instance.new("ScreenGui")
+  local Ui = Instance.new("Frame")
+  local UiCorner = Instance.new("UICorner")
+  local DefaultBG = Instance.new("Frame")
+  local ActiveUserText = Instance.new("TextLabel")
+  local Users = Instance.new("TextLabel")
+  local megumidevtext = Instance.new("TextLabel")
+  local UiOutline = Instance.new("UIStroke")
+  local PageButtonHolder = Instance.new("Frame")
+  local PageButtonHolderListLayout = Instance.new("UIListLayout")
+  local CategoryHolder = Instance.new("Frame")
+  local Seperator = Instance.new("Frame")
+  local HoldEverythingNigga = Instance.new("Frame")
+  
+  megumidev.Name = uiName.." by 0x75" or "megumi.lua made by 0x75"
+  megumidev.Parent = game.CoreGui
+  megumidev.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+  
+  Ui.Name = "Ui"
+  Ui.Parent = megumidev
+  Ui.BackgroundColor3 = Color3.fromRGB(21, 19, 22)
+  Ui.BorderColor3 = Color3.fromRGB(46, 41, 45)
+  Ui.BorderSizePixel = 2
+  Ui.Position = UDim2.new(0.22857143, 0, 0.206172839, 0)
+  Ui.Size = UDim2.new(0, 664, 0, 476)
+
+  makeDraggable(Ui, Ui)
+  
+  UiCorner.CornerRadius = UDim.new(0, 4)
+  UiCorner.Name = "UiCorner"
+  UiCorner.Parent = Ui
+
+  DefaultBG.Name = "PageBackground/Helper"
+  DefaultBG.Parent = Ui
+  DefaultBG.ZIndex = 0
+  DefaultBG.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+  DefaultBG.BorderColor3 = Color3.fromRGB(42, 42, 42)
+  DefaultBG.Position = UDim2.new(-4.59602063e-08, 0, 0.052521009, 0)
+  DefaultBG.Size = UDim2.new(0, 664, 0, 426)
+  
+  ActiveUserText.Name = "ActiveUserText"
+  ActiveUserText.Parent = Ui
+  ActiveUserText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  ActiveUserText.BackgroundTransparency = 1.000
+  ActiveUserText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+  ActiveUserText.BorderSizePixel = 0
+  ActiveUserText.Position = UDim2.new(0.00150602404, 0, 0.94747901, 0)
+  ActiveUserText.Size = UDim2.new(0, 90, 0, 24)
+  ActiveUserText.Font = Enum.Font.Arial
+  ActiveUserText.Text = "active user:"
+  ActiveUserText.TextColor3 = Color3.fromRGB(212, 206, 210)
+  ActiveUserText.TextSize = 15.000
+  
+  Users.Name = "Users"
+  Users.Parent = Ui
+  Users.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  Users.BackgroundTransparency = 1.000
+  Users.BorderColor3 = Color3.fromRGB(0, 0, 0)
+  Users.BorderSizePixel = 0
+  Users.Position = UDim2.new(0.135542169, 0, 0.94747901, 0)
+  Users.Size = UDim2.new(0, 573, 0, 24)
+  Users.Font = Enum.Font.Arial
+  Users.Text = activeUser or "Failed to get user data."
+  Users.TextColor3 = Color3.fromRGB(185, 86, 122)
+  Users.TextSize = 15.000
+  Users.TextXAlignment = Enum.TextXAlignment.Left
+  
+  megumidevtext.Parent = Ui
+  megumidevtext.Size = UDim2.new(0, 112, 0, 24)
+  megumidevtext.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  megumidevtext.BorderColor3 = Color3.fromRGB(0, 0, 0)
+  megumidevtext.BorderSizePixel = 0
+  megumidevtext.BackgroundTransparency = 1
+  megumidevtext.Font = Enum.Font.Arial
+  megumidevtext.TextColor3 = Color3.fromRGB(212, 206, 210)
+  megumidevtext.TextSize = 15
+  megumidevtext.Text = uiName or "megumi.dev"
+
+  makeDraggable(megumidevtext, Ui)
+  
+  UiOutline.Parent = Ui
+  UiOutline.Color = Color3.fromRGB(46, 41, 45)
+  UiOutline.Thickness = 2
+
+  CategoryHolder.Name = "CategoryHolder"
+  CategoryHolder.Parent = HoldEverythingNigga
+  CategoryHolder.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+  CategoryHolder.BorderColor3 = Color3.fromRGB(41, 41, 41)
+  CategoryHolder.Position = UDim2.new(0.010578569, 0, 0.0211267602, 0)
+  CategoryHolder.Size = UDim2.new(0, 178, 0, 408)
+
+  Seperator.Name = "Seperator"
+  Seperator.Parent = DefaultBG
+  Seperator.BackgroundColor3 = Color3.fromRGB(21, 19, 22)
+  Seperator.BorderColor3 = Color3.fromRGB(0, 0, 0)
+  Seperator.BorderSizePixel = 0
+  Seperator.Position = UDim2.new(0.287650615, 0, 0.0211267602, 0)
+  Seperator.Size = UDim2.new(0, 2, 0, 408)
+  
+  PageButtonHolder.Name = "PageButtonHolder"
+  PageButtonHolder.Parent = Ui
+  PageButtonHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  PageButtonHolder.BackgroundTransparency = 1.000
+  PageButtonHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+  PageButtonHolder.BorderSizePixel = 0
+  PageButtonHolder.Position = UDim2.new(0.1746988, 0, 0.00420168089, 0)
+  PageButtonHolder.Size = UDim2.new(0, 547, 0, 22)
+
+  makeDraggable(PageButtonHolder, Ui)
+
+  HoldEverythingNigga.Parent = Ui
+  HoldEverythingNigga.Name = "HoldEverythingNigga"
+  HoldEverythingNigga.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  HoldEverythingNigga.BorderColor3 = Color3.fromRGB(0, 0, 0)
+  HoldEverythingNigga.BorderSizePixel = 0
+  HoldEverythingNigga.Position = UDim2.new(-4.59602063e-08, 0, 0.052521009, 0)
+  HoldEverythingNigga.Size = UDim2.new(0, 664, 0, 426)
+  HoldEverythingNigga.Transparency = 1.000
+  
+  PageButtonHolderListLayout.Name = "PageButtonHolderListLayout"
+  PageButtonHolderListLayout.Parent = PageButtonHolder
+  PageButtonHolderListLayout.FillDirection = Enum.FillDirection.Horizontal
+  PageButtonHolderListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+  
+
+  local window = {}
+
+  function window:Page(pageName)
+    local PageButtonBackground = Instance.new("Frame")
+    local PageButtonBackgroundCorner = Instance.new("UICorner")
+    local PageButtonBackgroundCornerFix = Instance.new("Frame")
+    local PinkIndicator = Instance.new("Frame")
+    local PageText = Instance.new("TextButton")
+    local CreatedPage = Instance.new("Frame")
+    local CategoryScrollingFrame = Instance.new("ScrollingFrame")
+    local CategoryListLayout = Instance.new("UIListLayout")
+
+    CategoryScrollingFrame.Name = pageName.."CategoryScrollingFrame"
+    CategoryScrollingFrame.Parent = CategoryHolder
+    CategoryScrollingFrame.Active = true
+    CategoryScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    CategoryScrollingFrame.BackgroundTransparency = 1.000
+    CategoryScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    CategoryScrollingFrame.BorderSizePixel = 0
+    CategoryScrollingFrame.Position = UDim2.new(0.0337078646, 0, 0.0147058824, 0)
+    CategoryScrollingFrame.Size = UDim2.new(0, 166, 0, 396)
+    CategoryScrollingFrame.ScrollBarThickness = 0
+    CategoryScrollingFrame.Visible = false
+    
+    CategoryListLayout.Name = pageName.."CategoryListLayout"
+    CategoryListLayout.Parent = CategoryScrollingFrame
+    CategoryListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    CategoryListLayout.Padding = UDim.new(0, 2)
+
+    PageButtonBackground.Name = pageName.."PageButtonBackground"
+    PageButtonBackground.Parent = PageButtonHolder
+    PageButtonBackground.BackgroundColor3 = Color3.fromRGB(21, 19, 22)
+    PageButtonBackground.BorderColor3 = Color3.fromRGB(42, 42, 42)
+    PageButtonBackground.BorderSizePixel = 0
+    PageButtonBackground.Size = UDim2.new(0, 75, 0, 22)
+    
+    PageButtonBackgroundCorner.CornerRadius = UDim.new(0, 5)
+    PageButtonBackgroundCorner.Parent = PageButtonBackground
+    PageButtonBackgroundCorner.Name = pageName.."PageButtonBgCorner"
+    
+    PageButtonBackgroundCornerFix.Parent = PageButtonBackground
+    PageButtonBackgroundCornerFix.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+    PageButtonBackgroundCornerFix.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    PageButtonBackgroundCornerFix.BorderSizePixel = 0
+    PageButtonBackgroundCornerFix.Position = UDim2.new(0, 0, 0.636363626, 0)
+    PageButtonBackgroundCornerFix.Size = UDim2.new(0, 75, 0, 9)
+    PageButtonBackgroundCornerFix.Name = pageName.."PageButtonBgCornerFix"
+    PageButtonBackgroundCornerFix.Visible = false
+    
+    PinkIndicator.Parent = PageButtonBackground
+    PinkIndicator.BackgroundColor3 = Color3.fromRGB(185, 86, 122)
+    PinkIndicator.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    PinkIndicator.BorderSizePixel = 0
+    PinkIndicator.Position = UDim2.new(0.0399999991, 0, 0.0454545468, 0)
+    PinkIndicator.Size = UDim2.new(0, 70, 0, 1)
+    PinkIndicator.Name = pageName.."PinkIndicator"
+    PinkIndicator.Visible = false
+    
+    PageText.Parent = PageButtonBackground
+    PageText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    PageText.BackgroundTransparency = 1.000
+    PageText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    PageText.BorderSizePixel = 0
+    PageText.Size = UDim2.new(0, 75, 0, 22)
+    PageText.Font = Enum.Font.Arial
+    PageText.Text = pageName
+    PageText.TextColor3 = Color3.fromRGB(163, 159, 161)
+    PageText.TextSize = 14.000
+    PageText.Name = pageName.."PageText"
+
+    CreatedPage.Name = pageName.."CreatedPage"
+    CreatedPage.Parent = HoldEverythingNigga
+    CreatedPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    CreatedPage.BackgroundTransparency = 1.000
+    CreatedPage.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    CreatedPage.BorderSizePixel = 0
+    CreatedPage.Position = UDim2.new(0.3, 0, 0.071, 0)
+    CreatedPage.Size = UDim2.new(0, 453, 0, 406)
+    CreatedPage.Visible = false
+
+    local CategoryButtonActive = Instance.new("TextButton")
+    local CategoryGradientActive = Instance.new("UIGradient")
+    local CategoryPinkLineActive = Instance.new("Frame")
+    local CategoryTextActive = Instance.new("TextLabel")
+
+    CategoryButtonActive.Name = "ChangelogButtonActive"
+    CategoryButtonActive.Parent = CategoryScrollingFrame
+    CategoryButtonActive.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    CategoryButtonActive.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    CategoryButtonActive.BorderSizePixel = 0
+    CategoryButtonActive.Position = UDim2.new(pos1, 0, pos2, 0)
+    CategoryButtonActive.Size = UDim2.new(0, 166, 0, 25)
+    CategoryButtonActive.AutoButtonColor = false
+    CategoryButtonActive.Font = Enum.Font.Arial
+    CategoryButtonActive.Text = ""
+    CategoryButtonActive.TextColor3 = Color3.fromRGB(0, 0, 0)
+    CategoryButtonActive.TextSize = 14.000
+        
+    --active CategoryGradientActive.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(42, 34, 39)), ColorSequenceKeypoint.new(0.86, Color3.fromRGB(20, 20, 20)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 20, 20))}
+    CategoryGradientActive.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(42, 34, 39)), ColorSequenceKeypoint.new(0.86, Color3.fromRGB(20, 20, 20)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 20, 20))}
+    CategoryGradientActive.Name = "ChangelogGradientActive"
+    CategoryGradientActive.Parent = CategoryButtonActive
+        
+    CategoryPinkLineActive.Name = "ChangelogPinkLineActive"
+    CategoryPinkLineActive.Parent = CategoryButtonActive
+    CategoryPinkLineActive.BackgroundColor3 = Color3.fromRGB(185, 86, 122)
+    CategoryPinkLineActive.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    CategoryPinkLineActive.BorderSizePixel = 0
+    CategoryPinkLineActive.Size = UDim2.new(0, 2, 0, 25)
+    CategoryPinkLineActive.Visible = true
+        
+    CategoryTextActive.Name = "ChangelogTextActive"
+    CategoryTextActive.Parent = CategoryButtonActive
+    CategoryTextActive.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    CategoryTextActive.BackgroundTransparency = 1.000
+    CategoryTextActive.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    CategoryTextActive.BorderSizePixel = 0
+    CategoryTextActive.Position = UDim2.new(0.0481927693, 0, 0, 0)
+    CategoryTextActive.Size = UDim2.new(0, 158, 0, 25)
+    CategoryTextActive.Font = Enum.Font.Arial
+    CategoryTextActive.Text = "changelogs"
+        --active CategoryTextActive.TextColor3 = Color3.fromRGB(212, 206, 210)
+        --inactive 163, 159, 161
+    CategoryTextActive.TextColor3 = Color3.fromRGB(212, 206, 210)
+    CategoryTextActive.TextSize = 13.000
+    CategoryTextActive.TextXAlignment = Enum.TextXAlignment.Left
+
+    local categories = {}
+
+    function categories:NewChangelog(categoryname, pos1, pos2)
+        local CategoryButtonActive = Instance.new("TextButton")
+        local CategoryTextActive = Instance.new("TextLabel")
+
+        CategoryButtonActive.Name = categoryname.."CategoryButtonActive"
+        CategoryButtonActive.Parent = CategoryScrollingFrame
+        CategoryButtonActive.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        CategoryButtonActive.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        CategoryButtonActive.BorderSizePixel = 0
+        CategoryButtonActive.Position = UDim2.new(pos1, 0, pos2, 0)
+        CategoryButtonActive.Size = UDim2.new(0, 166, 0, 25)
+        CategoryButtonActive.AutoButtonColor = false
+        CategoryButtonActive.Font = Enum.Font.Arial
+        CategoryButtonActive.Text = ""
+        CategoryButtonActive.TextColor3 = Color3.fromRGB(0, 0, 0)
+        CategoryButtonActive.TextSize = 14.000
+        CategoryButtonActive.BackgroundTransparency = 1.000
+        
+        CategoryTextActive.Name = categoryname.."CategoryTextActive"
+        CategoryTextActive.Parent = CategoryButtonActive
+        CategoryTextActive.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        CategoryTextActive.BackgroundTransparency = 1.000
+        CategoryTextActive.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        CategoryTextActive.BorderSizePixel = 0
+        CategoryTextActive.Position = UDim2.new(0.0481927693, 0, 0, 0)
+        CategoryTextActive.Size = UDim2.new(0, 158, 0, 25)
+        CategoryTextActive.Font = Enum.Font.Arial
+        CategoryTextActive.Text = categoryname or "active"
+        --active CategoryTextActive.TextColor3 = Color3.fromRGB(212, 206, 210)
+        --inactive 163, 159, 161
+        CategoryTextActive.TextColor3 = Color3.fromRGB(163, 159, 161)
+        CategoryTextActive.TextSize = 13.000
+        CategoryTextActive.TextXAlignment = Enum.TextXAlignment.Left
+
+        local sections = {}
+
+        function sections:NewSection(sectionname, pos1, pos2, size1)
+            local TopSectionHolder = Instance.new("Frame")
+            local SectionChildrenHolder = Instance.new("Frame")
+            local SectionText = Instance.new("TextLabel")
+
+            TopSectionHolder.Name = "TopSection/Holder"
+            TopSectionHolder.Parent = CreatedPage
+            TopSectionHolder.BackgroundColor3 = Color3.fromRGB(23, 23, 25)
+            TopSectionHolder.BorderColor3 = Color3.fromRGB(41, 38, 42)
+            TopSectionHolder.Position = UDim2.new(0, pos1, 0, pos2)
+            TopSectionHolder.Size = UDim2.new(0, 222, 0, 24)
+            
+            SectionChildrenHolder.Name = "SectionChildrenHolder"
+            SectionChildrenHolder.Parent = TopSectionHolder
+            SectionChildrenHolder.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+            SectionChildrenHolder.BorderColor3 = Color3.fromRGB(41, 41, 41)
+            SectionChildrenHolder.Position = UDim2.new(0, 0, 1.08333337, 0)
+            SectionChildrenHolder.Size = UDim2.new(0, 222, 0, size1)
+
+            SectionText.Name = "SectionText"
+            SectionText.Parent = TopSectionHolder
+            SectionText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            SectionText.BackgroundTransparency = 1.000
+            SectionText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            SectionText.BorderSizePixel = 0
+            SectionText.Position = UDim2.new(0.0450450443, 0, 0, 0)
+            SectionText.Size = UDim2.new(0, 204, 0, 24)
+            SectionText.Font = Enum.Font.Arial
+            SectionText.Text = sectionname or "section"
+            SectionText.TextColor3 = Color3.fromRGB(212, 206, 210)
+            SectionText.TextSize = 15.000
+            SectionText.TextXAlignment = Enum.TextXAlignment.Left
+
+            local sectionitems = {}
+
+            function sectionitems:NewLabel(name, pos1, textcolor)
+                local LabelHolder = Instance.new("Frame")
+                local LabelText = Instance.new("TextLabel")
+
+                LabelHolder.Name = "LabelHolder"
+                LabelHolder.Parent = SectionChildrenHolder
+                LabelHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                LabelHolder.BackgroundTransparency = 1.000
+                LabelHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                LabelHolder.BorderSizePixel = 0
+                LabelHolder.Position = UDim2.new(0, 0, 0.0833333358, pos1)
+                LabelHolder.Size = UDim2.new(0, 222, 0, 16)
+
+                LabelText.Name = "LabelText"
+                LabelText.Parent = LabelHolder
+                LabelText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                LabelText.BackgroundTransparency = 1.000
+                LabelText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                LabelText.BorderSizePixel = 0
+                LabelText.Position = UDim2.new(0.918918908, 0, 0, 0)
+                LabelText.Size = UDim2.new(0, 211, 0, 15)
+                LabelText.Font = Enum.Font.Arial
+                LabelText.Text = name or "label"
+                LabelText.TextColor3 = textcolor or Color3.fromRGB(177, 171, 175)
+                LabelText.TextSize = 13.000
+                LabelText.TextXAlignment = Enum.TextXAlignment.Left
+            end
+
+            function sectionitems:NewValueBox(name, startvalue, pos1, callback)
+                local valueholder = Instance.new("Frame")
+                local valuetext = Instance.new("TextLabel")
+                local ValueTextbox = Instance.new("TextBox")
+                local ValueMinusButton = Instance.new("TextButton")
+                local ValuePlusButton = Instance.new("TextButton")
+
+                valueholder.Name = "valueholder"
+                valueholder.Parent = SectionChildrenHolder
+                valueholder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                valueholder.BackgroundTransparency = 1.000
+                valueholder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                valueholder.BorderSizePixel = 0
+                valueholder.Position = UDim2.new(0, 0, 0.0833333358, pos1 + 5)
+                valueholder.Size = UDim2.new(0, 222, 0, 16)
+
+                valuetext.Name = "valuetext"
+                valuetext.Parent = valueholder
+                valuetext.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                valuetext.BackgroundTransparency = 1.000
+                valuetext.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                valuetext.BorderSizePixel = 0
+                valuetext.Position = UDim2.new(0.337837845, 0, 0, 0)
+                valuetext.Size = UDim2.new(0, 141, 0, 15)
+                valuetext.Font = Enum.Font.Arial
+                valuetext.Text = name or "value"
+                valuetext.TextColor3 = Color3.fromRGB(177, 171, 175)
+                valuetext.TextSize = 13.000
+                valuetext.TextXAlignment = Enum.TextXAlignment.Left
+
+                ValueTextbox.Name = "ValueTextbox"
+                ValueTextbox.Parent = valueholder
+                ValueTextbox.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+                ValueTextbox.BorderColor3 = Color3.fromRGB(40, 40, 40)
+                ValueTextbox.Position = UDim2.new(0.0945945978, 0, 0, 0)
+                ValueTextbox.Size = UDim2.new(0, 30, 0, 15)
+                ValueTextbox.Font = Enum.Font.SourceSans
+                ValueTextbox.PlaceholderColor3 = Color3.fromRGB(177, 171, 175)
+                ValueTextbox.Text = startvalue or "0"
+                ValueTextbox.TextColor3 = Color3.fromRGB(177, 171, 175)
+                ValueTextbox.TextSize = 14.000
+
+                ValueMinusButton.Name = "ValueMinusButton"
+                ValueMinusButton.Parent = valueholder
+                ValueMinusButton.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+                ValueMinusButton.BorderColor3 = Color3.fromRGB(40, 40, 40)
+                ValueMinusButton.Position = UDim2.new(0.0270270258, 0, 0, 0)
+                ValueMinusButton.Size = UDim2.new(0, 15, 0, 15)
+                ValueMinusButton.Font = Enum.Font.Arial
+                ValueMinusButton.Text = "-"
+                ValueMinusButton.TextColor3 = Color3.fromRGB(177, 171, 175)
+                ValueMinusButton.TextSize = 14.000
+
+                ValuePlusButton.Name = "ValuePlusButton"
+                ValuePlusButton.Parent = valueholder
+                ValuePlusButton.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+                ValuePlusButton.BorderColor3 = Color3.fromRGB(40, 40, 40)
+                ValuePlusButton.Position = UDim2.new(0.229729727, 0, 0, 0)
+                ValuePlusButton.Size = UDim2.new(0, 15, 0, 15)
+                ValuePlusButton.Font = Enum.Font.Arial
+                ValuePlusButton.Text = "+"
+                ValuePlusButton.TextColor3 = Color3.fromRGB(177, 171, 175)
+                ValuePlusButton.TextSize = 14.000
+
+                task.spawn(callback, startvalue)
+
+                ValueMinusButton.MouseButton1Down:Connect(function()
+                    startvalue = startvalue - 1
+                    ValueTextbox.Text = startvalue
+                    if ValueTextbox.Text ~= startvalue then
+                        startvalue = ValueTextbox.Text
+                    end
+                    task.spawn(callback, startvalue)
+                end)
+
+                ValuePlusButton.MouseButton1Down:Connect(function()
+                    startvalue = startvalue + 1
+                    ValueTextbox.Text = startvalue
+                    if ValueTextbox.Text ~= startvalue then
+                        startvalue = ValueTextbox.Text
+                    end
+                    task.spawn(callback, startvalue)
+                end)
+            end
+
+            function sectionitems:NewCheckbox(name, default, pos1, callback)
+                local CheckboxHolder = Instance.new("Frame")
+                local CheckboxBox = Instance.new("Frame")
+                local CheckboxBoxCorner = Instance.new("UICorner")
+                local CheckboxBoxOutline = Instance.new("UIStroke")
+                local CheckboxText = Instance.new("TextLabel")
+                local CheckboxButton = Instance.new("TextButton")
+
+                CheckboxHolder.Name = "CheckboxHolder"
+                CheckboxHolder.Parent = SectionChildrenHolder
+                CheckboxHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                CheckboxHolder.BackgroundTransparency = 1.000
+                CheckboxHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                CheckboxHolder.BorderSizePixel = 0
+                CheckboxHolder.Position = UDim2.new(0, 0, 0.0833333358, pos1)
+                CheckboxHolder.Size = UDim2.new(0, 222, 0, 16)
+                
+                CheckboxBox.Name = "CheckboxBox"
+                CheckboxBox.Parent = CheckboxHolder
+                CheckboxBox.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+                CheckboxBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                CheckboxBox.BorderSizePixel = 0
+                CheckboxBox.Position = UDim2.new(0.0360360369, 0, 0.0625, 0)
+                CheckboxBox.Size = UDim2.new(0, 14, 0, 14)
+                
+                CheckboxBoxCorner.CornerRadius = UDim.new(0, 4)
+                CheckboxBoxCorner.Name = "CheckboxBoxCorner"
+                CheckboxBoxCorner.Parent = CheckboxBox
+                
+                CheckboxBoxOutline.Parent = CheckboxBox
+                CheckboxBoxOutline.Color = Color3.fromRGB(40, 40, 40)
+                CheckboxBoxOutline.Thickness = 1.5
+                
+                CheckboxText.Name = "CheckboxText"
+                CheckboxText.Parent = CheckboxHolder
+                CheckboxText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                CheckboxText.BackgroundTransparency = 1.000
+                CheckboxText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                CheckboxText.BorderSizePixel = 0
+                CheckboxText.Position = UDim2.new(0.126126125, 0, 0, 0)
+                CheckboxText.Size = UDim2.new(0, 193, 0, 15)
+                CheckboxText.Font = Enum.Font.Arial
+                CheckboxText.Text = name or "checkbox"
+                CheckboxText.TextColor3 = Color3.fromRGB(177, 171, 175)
+                CheckboxText.TextSize = 13.000
+                CheckboxText.TextXAlignment = Enum.TextXAlignment.Left
+                
+                CheckboxButton.Name = "CheckboxButton"
+                CheckboxButton.Parent = CheckboxHolder
+                CheckboxButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                CheckboxButton.BackgroundTransparency = 1.000
+                CheckboxButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                CheckboxButton.BorderSizePixel = 0
+                CheckboxButton.Position = UDim2.new(0.0315315314, 0, 0, 0)
+                CheckboxButton.Size = UDim2.new(0, 15, 0, 15)
+                CheckboxButton.Font = Enum.Font.SourceSans
+                CheckboxButton.Text = ""
+                CheckboxButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+                CheckboxButton.TextSize = 14.000
+
+                local state = default
+
+                task.spawn(callback, state)
+
+                if state then
+                    task.spawn(function()
+                        
+                    end)
+                end
+
+                CheckboxButton.MouseButton1Down:Connect(function()
+                    state = not state
+                    if state then
+                        local TweenService = game:GetService("TweenService")
+
+                        local oncolor = Color3.fromRGB(241, 112, 160)
+
+                        local onanim = TweenService:Create(CheckboxBox, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {BackgroundColor3 = oncolor})
+
+                        onanim:Play()
+                    elseif not state then
+                        local TweenService = game:GetService("TweenService")
+
+                        local offcolor = Color3.fromRGB(23, 23, 23)
+
+                        local offanim = TweenService:Create(CheckboxBox, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {BackgroundColor3 = offcolor})
+
+                        offanim:Play()
+                    end
+
+                    task.spawn(callback, state)
+                end)
+
+                if default == true then
+                    CheckboxBox.BackgroundColor3 = Color3.fromRGB(241, 112, 160)
+                elseif default == false then
+                    CheckboxBox.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+                end
+
+
+            end
+
+            return sectionitems
+        end
+
+        return sections
+    end
+
+    PageText.MouseButton1Down:Connect(function()
+        for i, v in pairs(HoldEverythingNigga:GetChildren()) do
+            if v.Name == pageName.."CreatedPage" then
+                CreatedPage.Visible = true
+                v.Visible = true
+            elseif v.Name == "CategoryHolder" then
+                for i, k in pairs(v:GetChildren()) do
+                    if k.Name == pageName.."CategoryScrollingFrame" then
+                        k.Visible = true
+                    else
+                        k.Visible = false
+                    end
+                end
+            else
+                v.Visible = false
+            end
+        end
+
+        for i, v in pairs(PageButtonHolder:GetChildren()) do
+            for i, k in pairs(v:GetChildren()) do
+                if k:IsA("Frame") then
+                    k.Visible = false
+                elseif k:IsA("TextButton") then
+                    k.TextColor3 = Color3.fromRGB(163, 159, 161)
+                else
+                    skip()
+                end
+            end
+
+            if v:IsA("Frame") and v.Name ~= pageName.."PageButtonBackground" then
+                v.BackgroundColor3 = Color3.fromRGB(21, 19, 22)
+            elseif v.Name == pageName.."PageButtonBackground" then
+                for i, k in pairs(v:GetChildren()) do
+                    if k:IsA("Frame") then
+                        k.Visible = true
+                    elseif k:IsA("TextButton") then
+                        k.TextColor3 = Color3.fromRGB(212, 206, 210)
+                    else
+                        skip()
+                    end
+                end
+                v.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+            end
+        end
+
+        CreatedPage.Visible = true
+    end)
+
+    return categories
+  end
+
+  --cursor stuff
+    local Cursor = Instance.new("ScreenGui")
+    local cursorframe = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+
+
+    Cursor.Name = "Cursor"
+    Cursor.Parent = game.CoreGui
+    Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    cursorframe.Parent = Cursor
+    cursorframe.BackgroundColor3 = Color3.fromRGB(255, 119, 169)
+    cursorframe.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    cursorframe.BorderSizePixel = 0
+    cursorframe.Size = UDim2.new(0, 11, 0, 10)
+
+    UICorner.CornerRadius = UDim.new(0, 99)
+    UICorner.Parent = cursorframe
+
+    mouse.Move:Connect(function()
+        cursorframe.Position = UDim2.new(mouse.X/mouse.ViewSizeX, -5, mouse.Y/mouse.ViewSizeY, -15)
+    end)
+  
+  userInputService.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.Delete then
+        if Ui.Visible == true then
+            Ui.Visible = false
+            cursorframe.Visible = false
+        elseif Ui.Visible == false then
+            Ui.Visible = true
+            cursorframe.Visible = true
+            cursorframe.ZIndex = 10000000000
+        end
+    end
+  end)
+
+  return window
+end
+
+local players = game:GetService("Players")
+local localplayer = players.LocalPlayer
+
+return library
