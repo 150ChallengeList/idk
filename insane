@@ -8,6 +8,11 @@ local httpService = game:GetService("HttpService")
 local mouse = plr:GetMouse()
 local viewportSize = workspace.CurrentCamera.ViewportSize
 
+if game:GetService("CoreGui"):FindFirstChild("megumi.lua by 0x75") then
+    game:GetService("CoreGui")["megumi.lua by 0x75"]:Destroy()
+    game:GetService("CoreGui")["Cursor"]:Destroy()
+end
+
 function skip()
 
 end
@@ -405,6 +410,97 @@ function library:Window(uiName, activeUser)
                 LabelText.TextXAlignment = Enum.TextXAlignment.Left
             end
 
+            function sectionitems:NewOptionList(name, opts, pos1, callback)
+                local optionholder = Instance.new("Frame")
+                local optiontext = Instance.new("TextLabel")
+                local selectedoptiontext = Instance.new("TextLabel")
+                local rightarrowbutton = Instance.new("ImageButton")
+                local leftarrowbutton = Instance.new("ImageButton")
+
+                optionholder.Name = "optionholder"
+                optionholder.Parent = SectionChildrenHolder
+                optionholder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                optionholder.BackgroundTransparency = 1.000
+                optionholder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                optionholder.BorderSizePixel = 0
+                optionholder.Position = UDim2.new(0, 0, 0.0833333358, pos1)
+                optionholder.Size = UDim2.new(0, 222, 0, 16)
+
+                optiontext.Name = "optiontext"
+                optiontext.Parent = optionholder
+                optiontext.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                optiontext.BackgroundTransparency = 1.000
+                optiontext.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                optiontext.BorderSizePixel = 0
+                optiontext.Position = UDim2.new(0.0450450443, 0, 0, 0)
+                optiontext.Size = UDim2.new(0, 107, 0, 15)
+                optiontext.Font = Enum.Font.Arial
+                optiontext.Text = "options"
+                optiontext.TextColor3 = Color3.fromRGB(177, 171, 175)
+                optiontext.TextSize = 13.000
+                optiontext.TextXAlignment = Enum.TextXAlignment.Left
+
+                rightarrowbutton.Name = "rightarrowbutton"
+                rightarrowbutton.Parent = optionholder
+                rightarrowbutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                rightarrowbutton.BackgroundTransparency = 1.000
+                rightarrowbutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                rightarrowbutton.BorderSizePixel = 0
+                rightarrowbutton.Position = UDim2.new(0.9009009, 0, 0.0889091492, 0)
+                rightarrowbutton.Rotation = 90.000
+                rightarrowbutton.Size = UDim2.new(0, 11, 0, 11)
+                rightarrowbutton.Image = "rbxassetid://13891887533"
+
+                leftarrowbutton.Name = "leftarrowbutton"
+                leftarrowbutton.Parent = optionholder
+                leftarrowbutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                leftarrowbutton.BackgroundTransparency = 1.000
+                leftarrowbutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                leftarrowbutton.BorderSizePixel = 0
+                leftarrowbutton.Position = UDim2.new(0.581081092, 0, 0.0889091492, 0)
+                leftarrowbutton.Rotation = -90.000
+                leftarrowbutton.Size = UDim2.new(0, 11, 0, 11)
+                leftarrowbutton.Image = "rbxassetid://13891887533"
+
+                local tableIndex = 1
+
+                selectedoptiontext.Name = "selectedoptiontext"
+                selectedoptiontext.Parent = optionholder
+                selectedoptiontext.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                selectedoptiontext.BackgroundTransparency = 1.000
+                selectedoptiontext.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                selectedoptiontext.BorderSizePixel = 0
+                selectedoptiontext.Position = UDim2.new(0.630630612, 0, 0, 0)
+                selectedoptiontext.Size = UDim2.new(0, 60, 0, 15)
+                selectedoptiontext.Font = Enum.Font.Arial
+                selectedoptiontext.Text = opts[tableIndex]
+                selectedoptiontext.TextColor3 = Color3.fromRGB(177, 171, 175)
+                selectedoptiontext.TextSize = 13.000
+
+                rightarrowbutton.MouseButton1Click:Connect(function()
+                    if tableIndex == #opts then
+                        tableIndex = 1
+                        selectedoptiontext.Text = opts[tableIndex]
+                    else
+                        tableIndex = tableIndex + 1
+                        selectedoptiontext.Text = opts[tableIndex]
+                    end
+                    task.spawn(callback, selectedoptiontext.Text)
+                end)
+                leftarrowbutton.MouseButton1Click:Connect(function()
+                    if tableIndex < 1 then
+                        tableIndex = #opts
+                        selectedoptiontext.Text = opts[tableIndex]
+                    else
+                        tableIndex = tableIndex - 1
+                        selectedoptiontext.Text = opts[tableIndex]
+                    end
+                    task.spawn(callback, selectedoptiontext.Text)
+                end)
+
+                return options
+            end
+
             function sectionitems:NewValueBox(name, startvalue, pos1, callback)
                 local valueholder = Instance.new("Frame")
                 local valuetext = Instance.new("TextLabel")
@@ -418,7 +514,7 @@ function library:Window(uiName, activeUser)
                 valueholder.BackgroundTransparency = 1.000
                 valueholder.BorderColor3 = Color3.fromRGB(0, 0, 0)
                 valueholder.BorderSizePixel = 0
-                valueholder.Position = UDim2.new(0, 0, 0.0833333358, pos1 + 5)
+                valueholder.Position = UDim2.new(0, 0, 0.0833333358, pos1)
                 valueholder.Size = UDim2.new(0, 222, 0, 16)
 
                 valuetext.Name = "valuetext"
@@ -690,5 +786,9 @@ end
 
 local players = game:GetService("Players")
 local localplayer = players.LocalPlayer
+
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local localPlayer = Players.LocalPlayer
 
 return library
